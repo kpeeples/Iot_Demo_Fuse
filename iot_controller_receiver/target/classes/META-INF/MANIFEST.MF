@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1433339314737
+Build-Jdk: 1.7.0_79
+Built-By: psteiner
+Bundle-ManifestVersion: 2
+Bundle-Name: IOT Controller Receiver
+Bundle-SymbolicName: controller_receiver
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: com.redhat.demo.iot_controller_data;uses:="javax.xml.bin
+ d.annotation";version="1.0.0.SNAPSHOT"
+Import-Package: javax.xml.bind.annotation,org.apache.activemq,org.apache
+ .activemq.camel.component,org.osgi.service.blueprint;version="[1.0.0,2.
+ 0.0)"
+Tool: Bnd-1.50.0

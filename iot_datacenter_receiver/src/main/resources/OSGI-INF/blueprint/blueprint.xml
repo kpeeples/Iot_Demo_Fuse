@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+       http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+
+		<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent" >
+	        <property name="connectionFactory">
+	          <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+	            <property name="brokerURL" value="vm://localhost?create=false&amp;waitForStart=10000" />
+	            <property name="userName" value="admin"/>
+	            <property name="password" value="admin"/>
+	          </bean>
+	        </property>
+	    </bean>
+
+    	
+ 		<bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource">
+	        <property name="driverClassName" value="org.postgresql.Driver" />
+	        <property name="url" value="jdbc:postgresql://localhost:5432/demo" />
+	        <property name="username" value="psteiner" />
+	        <property name="password" value="change12_me" />
+	        <property name="initialSize" value="10" />
+	        <property name="maxActive" value="5" />
+	        <property name="defaultAutoCommit" value="false" />
+	    </bean>
+	   
+	    <bean id="dataToSQL" class="com.redhat.demo.iot.datacenter.receiver.DataToSQLBean">
+	    </bean>
+	    
+	    
+	  <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+		  <route id="datacenter_receive">
+			    <from uri="activemq:queue:message.to.datacenter"/>
+			    <log message="Datacenter_Receiver ${body}"/>
+			    <unmarshal>
+			      	<jaxb contextPath="com.redhat.demo.iot.datacenter.receiver"/>
+			    </unmarshal>
+			    <log message="After unmarshall"/>
+			    <to uri="bean:dataToSQL?method=toSql"/>
+			    <to uri="jdbc:datasource"/>
+		  </route>
+	</camelContext>
+
+</blueprint>
