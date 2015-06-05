@@ -1,0 +1,19 @@
+package com.redhat.demo.iot_rules;
+
+import com.redhat.demo.iot.controller.cep.data.DataSet;
+
+declare DataSet
+	@role ( event )
+	@expires( 2d )
+end
+	
+
+
+rule "rule2"
+when
+	$data1:DataSet ( payload > 1 ) from entry-point IOTStream
+	$data2:DataSet ( this != $data1, deviceID == $data1.deviceID, payload == $data1.payload ) over window:length( 2 ) from entry-point IOTStream 
+then
+	System.out.println("Second event with same value as previous one received!");
+	$data1.setRequired(1);
+end

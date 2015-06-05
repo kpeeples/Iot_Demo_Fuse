@@ -11,8 +11,6 @@ public class DataToSQLBean {
 	        sb.append("'").append(dataSet.getDeviceID()).append("', ");
 	        sb.append("'").append(dataSet.getTimestamp()).append("', ");
 	        sb.append("'").append(dataSet.getPayload()).append("') ");
-
-	        System.out.println("SQL ="+ sb.toString() );
 	        
 	        return sb.toString();
 	    }
