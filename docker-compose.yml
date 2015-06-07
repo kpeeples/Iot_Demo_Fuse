@@ -1,0 +1,59 @@
+postgres:
+        build: ./Postgres
+        hostname: postgres
+        expose:
+                - 5432
+                - 80
+        ports:
+                - "80:80"
+
+iotcontrollertemperature:
+        build: ./iot_controller_temperature
+        hostname: iotcontrollertemperature
+        expose:
+                - 8181
+                - 61616
+        ports:
+                - "10002:8181"
+
+iotcontrollerrouter:
+        build: ./iot_controller_router
+        hostname: iotcontrollerrouter
+        expose:
+                - 8181
+                - 61616
+        ports:
+                - "10001:8181"
+        links:
+                - iotcontrollertemperature
+
+iotcontrollerreceiver:
+        build: ./iot_controller_receiver
+        hostname: iotcontrollerreceiver
+        expose:
+                - 8181
+                - 61616
+        ports:
+                - "10000:8181"
+                - "61616:61616"
+        links:
+                - iotcontrollerrouter
+
+iotdatacenterreceiver:
+        build: ./iot_datacenter_receiver
+        hostname: iotdatacenterreceiver
+        expose:
+                - 8181
+                - 61616
+        ports:
+                - "10003:8181"
+        links:
+                - postgres
+
+iotcontrollercep:
+        build: ./iot_controller_cep
+        hostname: iotcontrollercep
+        links:
+               - iotcontrollertemperature
+               - iotdatacenterreceiver
+               - postgres

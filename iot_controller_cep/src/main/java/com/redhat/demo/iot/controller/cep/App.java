@@ -23,7 +23,8 @@ public class App
 {
     private static final Logger log = Logger.getLogger(CepServer.class.getName());
 	
-	public static String brokerURL = "tcp://localhost:61616";
+	public static String sourceBrokerURL = "tcp://iotcontrollertemperature:61616";
+	public static String targetBrokerURL = "tcp://iotdatacenterreceiver:61616";
 	public static String sourceQueueName = "message.to.cep";
 	public static String targetQueueName = "message.to.datacenter";
 	 
@@ -31,8 +32,21 @@ public class App
     {
     	String	messageFromQueue;
     		
-		Consumer consumer = new Consumer(sourceQueueName, brokerURL);
-		Producer producer = new Producer(targetQueueName, brokerURL);
+    	System.out.println(" Check if remote AMQ-Broker are already available");
+    	AMQTester tester = new AMQTester(); 
+    	
+    	while( tester.testAvailability( sourceBrokerURL ) == false ) {
+    		System.out.println(" AMQ-Broker " + sourceBrokerURL + " not yet available ");
+    		Thread.sleep(10000);
+    	}
+    	
+    	while( tester.testAvailability( targetBrokerURL ) == false ) {
+    		System.out.println(" AMQ-Broker " + targetBrokerURL + " not yet available ");
+    		Thread.sleep(10000);
+    	}
+    	
+		Consumer consumer = new Consumer(sourceQueueName, sourceBrokerURL);
+		Producer producer = new Producer(targetQueueName, targetBrokerURL);
 		CepServer cepServer = new CepServer();
 		
 		while ( 1 ==1 ) {

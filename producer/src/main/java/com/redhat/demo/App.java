@@ -21,6 +21,7 @@ public class App
 {
 	public static String brokerURL = "tcp://localhost:61616";
 	
+	
 	// Default Values for message producer
     private static final String DEFAULT_DEVICETYPE   = "1";
     private static final String DEFAULT_DEVICEID     = "1";

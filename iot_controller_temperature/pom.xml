@@ -3,7 +3,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.redhat.demo</groupId>
+  <groupId>com.redhat.demo.iot.controller.temperature</groupId>
   <artifactId>controller_temperature</artifactId>
   <packaging>bundle</packaging>
   <version>1.0.0-SNAPSHOT</version>
@@ -91,8 +91,13 @@
         <configuration>
           <instructions>
             <Bundle-SymbolicName>controller_temperature</Bundle-SymbolicName>
-            <Private-Package>com.redhat.demo.iot.*</Private-Package>
-            <Import-Package>*</Import-Package>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+            <Bundle-Description>${project.description}</Bundle-Description>
+            <Import-Package>*
+            </Import-Package>
+  			<Export-Package>
+  				com.redhat.demo.iot.controller.temperature
+  			</Export-Package>
           </instructions>
         </configuration>
       </plugin>

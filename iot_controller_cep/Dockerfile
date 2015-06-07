@@ -1,28 +1,29 @@
-FROM    psteiner/fsw60_base
+FROM    psteiner/fuse
 
 MAINTAINER psteiner <psteiner@redhat.com>
 
 USER root
-run chown -R psteiner:psteiner $HOME/tmp
 
-# copy and prepare run-script
-ADD script/startup.sh $HOME/tmp/startup.sh
-RUN chmod +x $HOME/tmp/startup.sh
+# Transfer sources
+ADD src $HOME/tmp/src/
+ADD pom.xml $HOME/tmp/
+
+# transfer install-script
+ADD Docker_Files/scripts/install.sh $HOME/tmp/
+ADD Docker_Files/scripts/run.sh $HOME/tmp/
+
+# make 'psteiner' the owner
 RUN chown -R psteiner:psteiner $HOME/tmp
+RUN chmod u+x $HOME/tmp/install.sh
+RUN chmod u+x $HOME/tmp/run.sh
 
+# switch to psteiner
 USER psteiner
 
-# transfer sources
 WORKDIR $HOME/tmp
-ADD target $HOME/tmp/
-ADD config/standalone-full.xml $HOME/tmp/standalone-full.xml
 
-
-# copy config
-RUN mv $HOME/tmp/standalone-full.xml $HOME/fsw/jboss-eap-6.1/standalone/configuration
-
-# copy jar
-RUN mv $HOME/tmp/iot_controller_cep-jar-with-dependencies.jar $HOME/iot_controller_cep.jar
+# run the installation
+RUN $HOME/tmp/install.sh
 
 # cleanup
 # RUN rm -rf $HOME/tmp/src
@@ -30,7 +31,7 @@ RUN mv $HOME/tmp/iot_controller_cep-jar-with-dependencies.jar $HOME/iot_controll
 
 EXPOSE 8080 9990 4447 5459
 
-CMD $HOME/tmp/startup.sh
+CMD $HOME/tmp/run.sh
 
 
 

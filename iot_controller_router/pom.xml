@@ -3,7 +3,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.redhat.demo</groupId>
+  <groupId>com.redhat.demo.iot.controller.router</groupId>
   <artifactId>controller_router</artifactId>
   <packaging>bundle</packaging>
   <version>1.0.0-SNAPSHOT</version>
@@ -91,9 +91,14 @@
         </executions>
         <configuration>
           <instructions>
-            <Bundle-SymbolicName>controller_router</Bundle-SymbolicName>
-            <Private-Package>com.redhat.demo.iot.*</Private-Package>
-            <Import-Package>*</Import-Package>
+            <Bundle-SymbolicName>controller_receiver</Bundle-SymbolicName>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+            <Bundle-Description>${project.description}</Bundle-Description>
+            <Import-Package>*
+            </Import-Package>
+  			<Export-Package>
+  				com.redhat.demo.iot.controller.router
+  			</Export-Package>
           </instructions>
         </configuration>
       </plugin>
