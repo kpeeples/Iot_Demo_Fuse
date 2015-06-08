@@ -1,0 +1,153 @@
+= IoT Demo
+
+:Author:    Patrick Steiner
+:Email:     psteiner@redhat.com
+:Date:      30.05.2015
+
+:toc: macro
+
+toc::[]
+
+== What it's all about
+This demo is supposed to show a lab-based version of a typical Internet of Things ( IoT )
+setup. It follows a 3-Layered architecture of
+
+* Edge: as created of data
+* Controller: first level of data processing
+* Datacenter: well, the datacenter ...
+
+These layers can - and in this demo will - be made out of a set of
+Red Hat JBoss products, each taking over an important part in the IoT landscape
+
+image::./pictures/iot.png[]
+
+== What has been implemented?
+As for now, this demo includes:
+
+ * 1 edge device, which simulates a temperature sensor
+ * controller functionality to
+  ** transformation of edge message to a XML format ( not yet needed )
+  ** route message based on source to be able to apply different procedures
+  ** complex event processing to filter messages
+ * datacenter functionality to
+  **  store filtered / receiver data in a Postgresql
+
+Communication between edge and controller, as well as controller internal communication
+is implemented via JMS messaging.
+
+=== Temperature Sensor
+This dummy sensor is implemented in a very simple but generic
+way. As of now, it works with the following steps:
+
+ 1. start with an initial value ( 70 in this case )
+ 2. send data record via JMS to Controller
+ 3. alter data
+   * get random number between 1 and 1000
+   * if random number is <= 10 reduce data by 1
+   * if random number is >= 990 increase data by 1
+ 4. back to 2.
+
+=== Controller
+The controller does the following
+
+ 1. receive data record via JMS
+ 2. transform data from sensor-specific format to xml ( not yet required )
+ 3. route data based on sensor type
+ 4. use complex event processing ( CEP ) to filter messages. Currently we only
+       have one rule, which deletes messages if the value is the same as in the
+       previous message.
+ 5. send data record via JMS to datacenter
+
+All functionality for the controller is implemented with http://www.redhat.com/de/technologies/jboss-middleware/fuse-service-works[Red Hat JBoss Fuse Service Works], with every step packaged in its own container.
+
+=== Datacenter
+As for now, the datacenter does the following
+
+ 1. store the received data in a database ( Postgresql )
+
+== Runtime Environment
+The entire functionality is divided into various services, each running in its
+own Docker container.
+
+image::./pictures/overview.png[]
+
+== Prerequisites
+
+=== Dockerhost
+The entire demo is build on https://www.docker.com/[Docker]. The various elements all run in their own container.
+
+Please do follow the instructions on how to install Docker on your host, based on the https://docs.docker.com/installation/[relevant pages] from Docker.com
+
+=== Docker Compose
+For the first time I have used docker-compose as a tool to help me getting things up and running.
+To be honest, it helped a lot.
+
+Please follow the instructions on https://docs.docker.com/compose/[Docker-Compose] on how to install docker-compose on your system.
+
+=== Maven
+As our installation procedure will build a few jars for you convenience,
+please do have the appropriate tools up and running on your Docker host.
+
+
+== Building the Demo Environment
+
+=== Getting the code
+
+The procedure to build the various requried Docker container has been automated for your convenience,
+all you need to do is to clone the most current version of the demo from github
+----
+git clone https://github.com/PatrickSteiner/Iot_Demo_Fuse
+----
+
+=== Providing the Red Hat JBoss Products
+I have not included the various JBoss products in the git repository, so it will be your obligation to retrieve them and to place them in their directories.
+
+	* `jboss-fuse-full-6.1.1.redhat-412.zip` into `./Fuse/Docker_Files/software`
+
+=== Building the demo
+I have tried to make the deployment of the entire IoT Demo as convenient as possibe.
+All you need to do is
+
+  * make sure you have all required pre-requisites
+  * downloaded and places the Red Hat JBoss Fuse installable
+  * run `./build.sh`
+
+== Starting the environment
+
+Once you have completed the previous step, you can run the demo in your own
+environment. Simply use `./docker-compose up` to start all images with the
+required parameter and configurations.
+
+After successful launch of all container, you can use your browser to view
+the following dashboads
+
+[width="80%",frame="topbot",options="header,footer"]
+|======================
+|URL | Service | User / Password
+|http://localhost:10000/hawtio | Controller-Receiver Management Console | admin / admin
+|http://localhost:10001/hawtio | Controller-Router Management Console | admin / admin
+|http://localhost:10002/hawtio | Controller-Temperature Management Console | admin / admin
+|http://localhost:10003/hawtio | Datacenter-Receiver Management Console | admin / admin
+|http://localhost/phpPgAdmin/ | phpPGAdmin on DB-Server | psteiner / change12_me
+|======================
+
+== Creating testdata
+
+As for now, we only have one data-producer `JMS_Temperature`. Simply run it with
+
+----
+java -jar JMS_Temperature/target/jms-producer-jar-with-dependencies.jar
+----
+
+This will create one record ... nothing fancy, but this is only the beginning!
+
+= To Do
+
+ * Update the producer to create more datasets, probably via an environment variable
+ * Create some real CEP rules
+ * Add the Datacenter-Layer with
+
+   ** Database
+   ** Human processes
+   ** Dashboard
+ * Add MQTT based edge
