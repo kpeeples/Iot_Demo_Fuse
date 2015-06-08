@@ -40,21 +40,19 @@ public class Consumer  implements ExceptionListener  {
 
 	}
 	
-	 public String run() {
+	 public String run(int waitTimeout) {
 		 TextMessage 	textMessage;
 		 String 		text=null;
 		 
          try {
              // Wait for a message
-             Message message = consumer.receive(100000);
+             Message message = consumer.receive(waitTimeout);
 
              if (message instanceof TextMessage) {
                  textMessage = (TextMessage) message;
                  text = textMessage.getText();
                  System.out.println("Received: " + text);
-             } else {
-                 System.out.println("Received: " + message);
-             }
+             } 
          } catch (Exception e) {
              System.out.println("Caught: " + e);
              e.printStackTrace();

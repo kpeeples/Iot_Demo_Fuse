@@ -132,14 +132,39 @@ the following dashboads
 |======================
 
 == Creating testdata
-
-As for now, we only have one data-producer `JMS_Temperature`. Simply run it with
+I have tried to create a "general purpose" producer. As of now, he will produce
+values based on a simple structure
 
 ----
-java -jar JMS_Temperature/target/jms-producer-jar-with-dependencies.jar
+@XmlRootElement(name = "dataSet")
+@XmlType(propOrder = { "timestamp", "deviceType", "deviceID", "payload","required" })
+public class DataSet {
+	private String	timestamp;
+	private int		deviceType;
+	private int		deviceID;
+	private	int		payload;
+	private int		required;
 ----
 
-This will create one record ... nothing fancy, but this is only the beginning!
+There are system properties which you can use to alter the behavior of the client
+
+[width="80%",frame="topbot",options="header,footer"]
+|======================
+|Name | Function | Default
+|deviceType | Type of device to simulate | 1
+|deviceID | ID of device to simulate | 1
+|initialValue | value to start simulation with | 70
+|count | How many messages to produce | 1
+|waitime | Seconds to wait between messages | 1
+|======================
+
+For convenience I created a small script `run.sh` which you can use
+to start the creation and delivery of
+
+ * 10 messages
+ * deviceType = 1, temperature gauge
+ * deviceID = 1
+ * waitTime = 1
 
 = To Do
 

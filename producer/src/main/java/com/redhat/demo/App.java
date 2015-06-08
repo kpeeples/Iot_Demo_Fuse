@@ -26,6 +26,8 @@ public class App
     private static final String DEFAULT_DEVICETYPE   = "1";
     private static final String DEFAULT_DEVICEID     = "1";
     private static final String DEFAULT_INITIALVALUE = "70";
+    private static final String DEFAULT_COUNT 		 = "1";
+    private static final String DEFAULT_WAIT		 = "1";
 
 	 
     public static void main( String[] args ) throws Exception
@@ -39,25 +41,28 @@ public class App
     	// Create data to send
         dummy = new DummyDataGenerator();
         
-        String devType = System.getProperty("DeviceType", DEFAULT_DEVICETYPE);
-        String devID = System.getProperty("DeviceID", DEFAULT_DEVICEID);
+        String devType = System.getProperty("deviceType", DEFAULT_DEVICETYPE);
+        String devID = System.getProperty("deviceID", DEFAULT_DEVICEID);
         int initialValue = Integer.parseInt(System.getProperty("initialValue", DEFAULT_INITIALVALUE));
+        int count = Integer.parseInt(System.getProperty("count", DEFAULT_COUNT));
+        int waitTime = Integer.parseInt(System.getProperty("waitTime", DEFAULT_WAIT));
         
         dummy.createInitialDataSet(devType, devID, initialValue); 
 
-        // Transform DataSet to XML
-        JAXBContext jaxbContext = JAXBContext.newInstance(TemperatureDataSet.class);
-		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-		StringWriter sw = new StringWriter();
- 
-		// output pretty printed
-		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
- 
-		jaxbMarshaller.marshal(dummy.getDataSet(), sw);
-		
         Producer producer = new Producer(factory, "message.receive");
-        producer.run( sw.toString() );
         
+        int counter = 0;
+        while ( counter < count ) {
+			
+			producer.run( dummy.getDataSetXML() );
+		    
+			dummy.updateDataSet();
+			
+			counter++;
+			
+			Thread.sleep ( waitTime * 1000 );
+        }
+		    
         producer.close();
     }
 }

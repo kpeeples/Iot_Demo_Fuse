@@ -38,10 +38,10 @@ public class DummyDataGenerator {
 	}
 	
 	public String getDataSetXML() {
-		return jaxbObjectToXML(getDataSet());
+		return jaxbObjectToXML();
 	}
 	
-	private String jaxbObjectToXML(TemperatureDataSet emp) {
+	private String jaxbObjectToXML( ) {
 		 
 		StringWriter writer = new StringWriter();
         
@@ -52,7 +52,7 @@ public class DummyDataGenerator {
             
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
  
-            m.marshal(emp, writer);
+            m.marshal(this.getDataSet(), writer);
            
         } catch (JAXBException e) {
             e.printStackTrace();
