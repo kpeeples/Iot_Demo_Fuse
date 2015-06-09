@@ -76,6 +76,7 @@
 
 	<destinations>
 		<queue physicalName="message.to.temperature" />
+		<queue physicalName="message.to.monitor" />
 	</destinations>
        
         <transportConnectors>

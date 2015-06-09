@@ -76,6 +76,8 @@
 
 	<destinations>
 		<queue physicalName="message.to.router" />
+		<queue physicalName="message.to.pressure" />
+		<queue physicalName="message.to.unknown" />
 	</destinations>
        
         <transportConnectors>

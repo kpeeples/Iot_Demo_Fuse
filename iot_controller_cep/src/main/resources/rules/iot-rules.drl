@@ -9,11 +9,29 @@ end
 	
 
 
-rule "rule2"
+rule "ThisDataNobodayCares"
 when
 	$data1:DataSet ( payload > 1 ) from entry-point IOTStream
 	$data2:DataSet ( this != $data1, deviceID == $data1.deviceID, payload == $data1.payload ) over window:length( 2 ) from entry-point IOTStream 
 then
-	System.out.println("Second event with same value as previous one received!");
-	$data1.setRequired(1);
+	System.out.println(" ----------------- Rule 2 ---------------------");
+	System.out.println("Data1.value = " + $data1.getPayload() );
+	System.out.println("Data2.value = " + $data2.getPayload() );
+	System.out.println("We have seen the same value from this Device before");
+	System.out.println(" ----------------------------------------------");
+	$data2.setRequired(0);
+end
+
+rule "ThisDataIWant"
+when
+	$data1:DataSet ( payload > 1 ) from entry-point IOTStream
+	$data2:DataSet ( this != $data1, deviceID == $data1.deviceID, payload != $data1.payload ) over window:length( 2 ) from entry-point IOTStream 
+then
+	System.out.println(" ----------------- Rule 1 ---------------------");
+	System.out.println("Data1.value = " + $data1.getPayload() );
+	System.out.println("Data2.value = " + $data2.getPayload() );
+	System.out.println("We have seen the same value from this Device before");
+	System.out.println(" ----------------------------------------------");	
+	
+	$data2.setRequired(1);
 end

@@ -4,13 +4,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "dataSet")
-@XmlType(propOrder = { "timestamp", "deviceType", "deviceID", "payload","required" })
+@XmlType(propOrder = { "timestamp", "deviceType", "deviceID", "payload","required", "errorCode", "errorMessage" })
 public class DataSet {
 	private String	timestamp;
 	private int		deviceType;
 	private int		deviceID;	
 	private	int		payload;
 	private int		required;
+	private String 	errorMessage;
+	private int  	errorCode;
 	
 	public DataSet()
 	{
@@ -98,6 +100,22 @@ public class DataSet {
 	 */
 	public void setPayload(int payload) {
 		this.payload = payload;
+	}
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
+
+	public int getErrorCode() {
+		return errorCode;
+	}
+
+	public void setErrorCode(int errorCode) {
+		this.errorCode = errorCode;
 	}
 	
 }

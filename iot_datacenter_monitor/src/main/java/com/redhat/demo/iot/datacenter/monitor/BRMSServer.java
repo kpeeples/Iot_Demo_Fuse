@@ -17,9 +17,9 @@ public class BRMSServer {
     }
     
     private void initKieSession() {
-    	KieServices kieServices = KieServices.Factory.get();
-	    KieContainer kieContainer = this.kieServices.getKieClasspathContainer();
-    	KieSession kieSession = kieContainer.newKieSession("ksession-rules");
+    	kieServices = KieServices.Factory.get();
+	    kieContainer = this.kieServices.getKieClasspathContainer();
+    	kieSession = kieContainer.newKieSession("ksession-rules");
     }
     
     public DataSet insert( DataSet event ) {

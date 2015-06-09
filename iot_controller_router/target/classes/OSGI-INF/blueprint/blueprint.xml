@@ -29,8 +29,21 @@
   <camelContext xmlns="http://camel.apache.org/schema/blueprint">
   <route id="controller_receive_router">
     <from uri="activemqLocal:queue:message.to.router"/>
-    <log message="Controller Router ${body}"/>
-    <to uri="activemqRemote:queue:message.to.temperature"/>
+
+    <choice>
+      <when>
+        <xpath>dataSet/deviceID = "0"</xpath>
+        <to uri="activemqLocal:queue:message.to.pressure"/>
+      </when>
+      <when>
+        <xpath>dataSet/deviceID = "1"</xpath>
+        <to uri="activemqRemote:queue:message.to.temperature"/>
+      </when>
+      <otherwise>
+        <to uri="activemqLocal:queue:message.to.unknown"/>
+      </otherwise>
+    </choice>
+
   </route>
 </camelContext>
 

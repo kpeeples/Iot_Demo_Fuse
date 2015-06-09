@@ -16,7 +16,7 @@ public class App
 {
     private static final Logger log = Logger.getLogger(BRMSServer.class.getName());
 	
-	public static String sourceBrokerURL = "tcp://iotcontrollertemperature:61616";
+	public static String sourceBrokerURL = "tcp://iotdatacenterreceiver:61616";
 	public static String sourceQueueName = "message.to.monitor";
 	 
     public static void main( String[] args ) throws Exception
@@ -25,6 +25,8 @@ public class App
     		
     	System.out.println(" Check if remote AMQ-Broker are already available");
     	AMQTester tester = new AMQTester(); 
+    	
+    
     	
     	while( tester.testAvailability( sourceBrokerURL ) == false ) {
     		System.out.println(" AMQ-Broker " + sourceBrokerURL + " not yet available ");
@@ -49,11 +51,18 @@ public class App
 	            StringReader reader = new StringReader( messageFromQueue );
 	            DataSet event = (DataSet) unmarshaller.unmarshal(reader);
 	            
-	            brmsServer.insert( event);
+	            event = brmsServer.insert( event);
 	         
 	            log.info("Message.required after Rules = " + event.getRequired());
 	            
-	            // check result and do something!!!!
+	            if ( event.getRequired() == 1 ) {
+	            	System.out.println("Rules Management want this to be alerted!");
+	            	System.out.println(" DeviceType = " + event.getDeviceType());
+	            	System.out.println(" DeviceID   = " + event.getDeviceID());
+	            	System.out.println(" Payload    = " + event.getPayload());
+	            	System.out.println(" ErrorCode  = " + event.getErrorCode());
+	            	System.out.println(" Message    = " + event.getErrorMessage());
+	            }
 	            
 			}
             

@@ -62,4 +62,4 @@ iotdatacentermonitor:
         build: ./iot_datacenter_monitor
         hostname: iotdatacentermonitor
         links:
-               - iotcontrollertemperature
+               - iotdatacenterreceiver

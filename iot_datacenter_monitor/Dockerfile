@@ -23,7 +23,7 @@ USER psteiner
 WORKDIR $HOME/tmp
 
 # run the installation
-# RUN $HOME/tmp/install.sh
+RUN $HOME/tmp/install.sh
 
 # cleanup
 # RUN rm -rf $HOME/tmp/src

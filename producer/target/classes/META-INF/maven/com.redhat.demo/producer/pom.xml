@@ -31,8 +31,37 @@
 		<artifactId>jaxb-api</artifactId>
 		<version>2.1</version>
 	</dependency>
-    
-    
   </dependencies>
+  
+  <build>
+      <finalName>iot_producer</finalName>
+      <plugins>
+      	<plugin>
+		    <artifactId>maven-assembly-plugin</artifactId>
+		    <executions>
+		      <execution>
+		        <phase>package</phase>
+		        <goals>
+		          <goal>single</goal>
+		        </goals>
+		      </execution>
+		    </executions>
+		    <configuration>
+		
+		      <archive>
+			      <manifest>
+				        <addClasspath>true</addClasspath>
+				        <mainClass>com.redhat.demo.App</mainClass>
+			      </manifest>
+		      </archive>
+		
+		      <descriptorRefs>
+		        <descriptorRef>jar-with-dependencies</descriptorRef>
+		      </descriptorRefs>
+		
+		    </configuration>
+		 </plugin> 
+      </plugins>
+  </build>
   
 </project>

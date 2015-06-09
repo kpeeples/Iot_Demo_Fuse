@@ -61,9 +61,12 @@ The controller does the following
 All functionality for the controller is implemented with http://www.redhat.com/de/technologies/jboss-middleware/fuse-service-works[Red Hat JBoss Fuse Service Works], with every step packaged in its own container.
 
 === Datacenter
-As for now, the datacenter does the following
+As for now, the datacenter is implemented with the following service,
+each running in it's own container
 
- 1. store the received data in a database ( Postgresql )
+ 1. receive messages from the controller
+ 2. store the received data in a database ( Postgresql )
+ 3. forward message to a monitor, who checks the data if an alert needs to be raised
 
 == Runtime Environment
 The entire functionality is divided into various services, each running in its
@@ -165,6 +168,18 @@ to start the creation and delivery of
  * deviceType = 1, temperature gauge
  * deviceID = 1
  * waitTime = 1
+
+If you want to change the data, please feel free to do so. Up until now, the
+Controller-Router will understand the following device types:
+
+[width="80%",frame="topbot",options="header,footer"]
+|======================
+|ID | Name | Behavior in Demo
+|0 | pressure-gauge | will be stored in `message.to.pressure` on Router-Container
+|1 | temperature-gauge | will be fully processed
+|any other | unknown device | will be stored in `message.to.unknown` on Router-Container
+|======================
+
 
 = To Do
 

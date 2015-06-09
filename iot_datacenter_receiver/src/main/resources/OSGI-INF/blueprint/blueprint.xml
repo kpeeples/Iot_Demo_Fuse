@@ -28,19 +28,33 @@
 	   
 	    <bean id="dataToSQL" class="com.redhat.demo.iot.datacenter.receiver.DataToSQLBean">
 	    </bean>
-	    
-	    
+	  
 	  <camelContext xmlns="http://camel.apache.org/schema/blueprint">
-		  <route id="datacenter_receive">
-			    <from uri="activemq:queue:message.to.datacenter"/>
-			    <log message="Datacenter_Receiver ${body}"/>
-			    <unmarshal>
-			      	<jaxb contextPath="com.redhat.demo.iot.datacenter.receiver"/>
-			    </unmarshal>
-			    <log message="After unmarshall"/>
-			    <to uri="bean:dataToSQL?method=toSql"/>
-			    <to uri="jdbc:datasource"/>
-		  </route>
-	</camelContext>
+  <route id="datacenter_receive">
+    <from uri="activemq:queue:message.to.datacenter"/>
+    <log message="Datacenter_Receiver ${body}"/>
+    <multicast>
+      <to uri="direct:Monitoring"/>
+      <to uri="direct:DB_Processing"/>
+    </multicast>
+  </route>
+
+  <route id="DB_Processing">
+    <from uri="direct:DB_Processing"/>
+    <log message="Message forwarded to DB_Processing"/>
+    <unmarshal>
+      <jaxb contextPath="com.redhat.demo.iot.datacenter.receiver"/>
+    </unmarshal>
+    <to uri="bean:dataToSQL?method=toSql"/>
+    <to uri="jdbc:datasource"/>
+  </route>
+
+  <route id="Monitoring">
+    <from uri="direct:Monitoring"/>
+    <log message="Message forwarded to Monitoring"/>
+    <to uri="activemq:queue:message.to.monitor"/>
+  </route>
+
+</camelContext>
 
 </blueprint>
