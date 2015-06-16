@@ -1,0 +1,42 @@
+package com.redhat.demo.iot_rules;
+
+import com.redhat.demo.iot.controller.cep.data.DataSet;
+
+declare DataSet
+	@role ( event )
+	@expires( 2d )
+end
+	
+rule "FirstData"
+when
+	$data:DataSet ( count == 0 ) from entry-point IOTStream
+then
+	System.out.println(" ----------------- ThisDataIWant ---------------------");
+	System.out.println("Data1.value = " + $data.getPayload() + "with count = " + $data.getCount() );
+	System.out.println(" ----------------------------------------------");	
+	
+	$data.setRequired(1);
+end	
+
+rule "ThisDataIWant"
+when
+	$data1:DataSet ( ) from entry-point IOTStream
+	$data2:DataSet ( this != $data1, deviceID == $data1.deviceID, payload != $data1.payload, count == $data1.count-1 ) from entry-point IOTStream 
+then
+	System.out.println(" ----------------- ThisDataIWant ---------------------");
+	System.out.println("Data1.value = " + $data1.getPayload() + "with count = " + $data1.getCount() );
+	System.out.println("Data2.value = " + $data2.getPayload() + "with count = " + $data2.getCount() );
+	System.out.println(" ----------------------------------------------");	
+	
+	$data1.setRequired(1);
+end
+
+
+rule "Calculate Average"
+when
+	$dataset : DataSet()  from entry-point IOTStream
+    Number( $average : floatValue ) from accumulate( $data: DataSet( $payload:payload ) over window:time( 10m ) from entry-point IOTStream, 
+        average( $payload ) )
+then
+	$dataset.setAverage($average);
+end

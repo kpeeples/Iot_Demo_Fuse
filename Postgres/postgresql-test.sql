@@ -3,7 +3,8 @@ CREATE TABLE "temperature" (
     pid                  SERIAL PRIMARY KEY,
     deviceID            DECIMAL,
     timestamp            BIGINT,
-    value                INTEGER
+    value                INTEGER,
+    average		 REAL
 );
 
 ALTER TABLE public."temperature" OWNER TO psteiner;

@@ -66,4 +66,4 @@ USER root
 CMD $HOME/postgresql-populate.sh
 
 # Build command -> docker build --rm -t psteiner/postgres .
-# run command -> docker run  -p 49380:5432 -d psteiner/postgres
+# run command -> docker run  -p 5432:5432 -p 80:80 -d psteiner/postgres

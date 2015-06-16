@@ -1,0 +1,45 @@
+package com.redhat.demo.iot_rules;
+
+import com.redhat.demo.iot.controller.cep.data.DataSet;
+import com.redhat.demo.iot.controller.cep.data.CompareToData;
+
+declare DataSet
+	@role ( event )
+	@expires( 2d )
+end
+
+rule "FirstData"
+when
+	$data:DataSet ( count == 1 ) from entry-point IOTStream
+then
+	System.out.println(" ----------------- ThisDataIWant ---------------------");
+	System.out.println("Data1.value = " + $data.getPayload() + "with count = " + $data.getCount() );
+	System.out.println(" ----------------------------------------------");	
+	
+	$data.setRequired(1);
+end	
+
+rule "ThisDataNobodayCares"
+when
+	$data1:DataSet ( ) from entry-point IOTStream
+	$data2:DataSet ( this != $data1, deviceID == $data1.deviceID, payload == $data1.payload, count == $data1.count-1 ) from entry-point IOTStream 
+then
+	System.out.println(" ----------------- ThisDataNobodayCares ---------------------");
+	System.out.println("Data1.value = " + $data1.getPayload() + " with count = " + $data1.getCount() );
+	System.out.println("Data2.value = " + $data2.getPayload() + " with count = " + $data2.getCount() );
+	System.out.println(" ----------------------------------------------");
+	$data2.setRequired(0);
+end
+
+rule "ThisDataIWant"
+when
+	$data1:DataSet ( ) from entry-point IOTStream
+	$data2:DataSet ( this != $data1, deviceID == $data1.deviceID, payload != $data1.payload, count == $data1.count-1 ) from entry-point IOTStream 
+then
+	System.out.println(" ----------------- ThisDataIWant ---------------------");
+	System.out.println("Data1.value = " + $data1.getPayload() + "with count = " + $data1.getCount() );
+	System.out.println("Data2.value = " + $data2.getPayload() + "with count = " + $data2.getCount() );
+	System.out.println(" ----------------------------------------------");	
+	
+	$data2.setRequired(1);
+end
