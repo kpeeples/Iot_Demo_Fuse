@@ -21,12 +21,10 @@ USER psteiner
 
 WORKDIR $HOME/tmp
 
-EXPOSE 8080 9990 4447 5459
-
 CMD $HOME/tmp/run.sh
 
 
 
 # Build command -> docker build --rm -t workspace_iotdatacentermonitor .
-# run command -> docker run -h iotcontrollerrouter -d workspace_iotdatacentermonitor
-# run and connect -> docker run -P -i -t -h iotcontrollercep workspace_iotdatacentermonitor /bin/bash
+# run command -> docker run -h iotcontrollerrouter -d workspacefuse_iotdatacentermonitor
+# run and connect -> docker run -P -i -t -h iotdatacentermonitor workspacefuse_iotdatacentermonitor /bin/bash

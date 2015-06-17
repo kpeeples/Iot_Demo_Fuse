@@ -53,6 +53,13 @@
 			<version>6.2.0.Final</version>
 		</dependency>
   
+  		<!-- BPM dependencies -->
+  		<dependency>
+      		<groupId>org.kie.remote</groupId>
+      		<artifactId>kie-remote-client</artifactId>
+      		<version>6.2.0.Final</version>
+    	</dependency>
+  
   		<!-- activeMQ dependencies. -->
 	    <dependency>
 	  		<groupId>javax.jms</groupId>
@@ -64,6 +71,7 @@
 	 		<artifactId>activemq-all</artifactId>
 	  		<version>5.9.0</version>
 		</dependency>
+		
   </dependencies>
   
   <build>

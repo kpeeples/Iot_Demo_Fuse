@@ -52,23 +52,17 @@ public class App
 	            DataSet event = (DataSet) unmarshaller.unmarshal(reader);
 	            
 	            event = brmsServer.insert( event);
-	         
-	            log.info("Message.required after Rules = " + event.getRequired());
-	            
+	                     
 	            if ( event.getRequired() == 1 ) {
-	            	System.out.println("Rules Management want this to be alerted!");
-	            	System.out.println(" DeviceType = " + event.getDeviceType());
-	            	System.out.println(" DeviceID   = " + event.getDeviceID());
-	            	System.out.println(" Payload    = " + event.getPayload());
-	            	System.out.println(" ErrorCode  = " + event.getErrorCode());
-	            	System.out.println(" Message    = " + event.getErrorMessage());
-	            } else {
-	            	System.out.println("This message needs no action");
-	            }
-	            
-
-            	System.out.println("------------------------------------------------------------");
-	            
+	            	
+	            	BPMClient bpmClient = new BPMClient();
+	            	bpmClient.doCall("http://localhost:8080/business-central", 
+	            				     "com.redhat.demo.iot.datacenter:HumanTask:1.0", 
+	            				     "psteiner", "change12_me",
+	            				     event);
+	            	
+	            } 
+	            	            
 			}
             
 		}

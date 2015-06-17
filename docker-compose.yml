@@ -50,6 +50,16 @@ iotdatacenterreceiver:
         links:
                 - postgres
 
+iotdatacenterbpm:
+        build: ./iot_datacenter_bpm
+        hostname: iotdatacenterbpm
+        expose:
+                - 8080
+                - 9990
+        ports:
+                - "10004:8080"
+                - "10005:9990"
+
 iotcontrollercep:
         build: ./iot_controller_cep
         hostname: iotcontrollercep
@@ -63,3 +73,4 @@ iotdatacentermonitor:
         hostname: iotdatacentermonitor
         links:
                - iotdatacenterreceiver
+               - iotdatacenterbpm

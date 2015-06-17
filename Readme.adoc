@@ -35,9 +35,14 @@ As for now, this demo includes:
 Communication between edge and controller, as well as controller internal communication
 is implemented via JMS messaging.
 
-=== Temperature Sensor
-This dummy sensor is implemented in a very simple but generic
-way. As of now, it works with the following steps:
+=== Edge Domain
+
+image::./pictures/Edge.png[]
+
+For this demo, I implemented a simple dummy sensor, which can be used to create
+ data like from a temperature-sensor, pressure-sensor, etc.
+
+As of now, it works with the following steps:
 
  1. start with an initial value ( 70 in this case )
  2. send data record via JMS to Controller
@@ -48,6 +53,9 @@ way. As of now, it works with the following steps:
  4. back to 2.
 
 === Controller
+
+image::./pictures/Controller.png[]
+
 The controller does the following
 
  1. receive data record via JMS
@@ -61,12 +69,16 @@ The controller does the following
 All functionality for the controller is implemented with http://www.redhat.com/de/technologies/jboss-middleware/fuse-service-works[Red Hat JBoss Fuse Service Works], with every step packaged in its own container.
 
 === Datacenter
+
+image::./pictures/Datacenter.png[]
+
 As for now, the datacenter is implemented with the following service,
 each running in it's own container
 
  1. receive messages from the controller
  2. store the received data in a database ( Postgresql )
- 3. forward message to a monitor, who checks the data if an alert needs to be raised
+ 3. forward message to a monitor, who checks the data if an alert needs to be raised. This alert
+ is implemented by starting business-process with a human task.
 
 == Runtime Environment
 The entire functionality is divided into various services, each running in its
@@ -132,6 +144,7 @@ the following dashboads
 |http://localhost:10002/hawtio | Controller-Temperature Management Console | admin / admin
 |http://localhost:10003/hawtio | Datacenter-Receiver Management Console | admin / admin
 |http://localhost/phpPgAdmin/ | phpPGAdmin on DB-Server | psteiner / change12_me
+|http://localhost:10004/business-central | JBoss BPM - Business-Central | psteiner / change12_me
 |======================
 
 == Creating testdata
@@ -161,13 +174,36 @@ There are system properties which you can use to alter the behavior of the clien
 |waitime | Seconds to wait between messages | 1
 |======================
 
-For convenience I created a small script `run.sh` which you can use
-to start the creation and delivery of
+For convenience I created a few simple ( very simple ) scripts which do the following
 
+1. `run.sh`
  * 10 messages
  * deviceType = 1, temperature gauge
  * deviceID = 1
+ * initialValue = 70
  * waitTime = 1
+ * count = 50
+
+2. `run_low.sh`
+ * 1 messages
+ * deviceType = 1, temperature gauge
+ * deviceID = 1
+ * initialValue = 50
+ * waitTime = 1
+ * count = 1
+
+3. `run_multi.sh`
+ * deviceType = 1
+ * deviceID = 1, temperature gauge
+ * initialValue = 70
+ * count = 100
+ * waitTime = 1
+ * ------------------
+ * deviceID = 2
+ * initialValue = 100
+ * ------------------
+ * deviceID = 3
+ * initialValue = 20
 
 If you want to change the data, please feel free to do so. Up until now, the
 Controller-Router will understand the following device types:
@@ -183,11 +219,7 @@ Controller-Router will understand the following device types:
 
 = To Do
 
- * Update the producer to create more datasets, probably via an environment variable
- * Create some real CEP rules
+ * Introduce real transformation in Controller
  * Add the Datacenter-Layer with
-
-   ** Database
-   ** Human processes
    ** Dashboard
  * Add MQTT based edge
