@@ -22,6 +22,7 @@ public class App
     private static final String DEFAULT_INITIALVALUE = "70";
     private static final String DEFAULT_COUNT 		 = "1";
     private static final String DEFAULT_WAIT		 = "1";
+    private static final String DEFAULT_FORMAT		 = "XML";
 
 	 
     public static void main( String[] args ) throws Exception
@@ -40,16 +41,26 @@ public class App
         int initialValue = Integer.parseInt(System.getProperty("initialValue", DEFAULT_INITIALVALUE));
         int count = Integer.parseInt(System.getProperty("count", DEFAULT_COUNT));
         int waitTime = Integer.parseInt(System.getProperty("waitTime", DEFAULT_WAIT));
+        String messageFormat = System.getProperty("messageFormat",DEFAULT_FORMAT);
         
         dummy.createInitialDataSet(devType, devID, initialValue); 
 
         Producer producer = new Producer(factory, "message.receive");
         
+        System.out.println(dummy.getDataSetCSV());
+        
         int counter = 0;
         while ( counter < count ) {
 			
-			producer.run( dummy.getDataSetXML() );
-		    
+        	if ( messageFormat.equals("XML")) {
+        		System.out.println("Sending as XML");
+        		producer.run( dummy.getDataSetXML() );
+        	} else {
+        		System.out.println("Sending as CSV");
+        		producer.run( dummy.getDataSetCSV() );
+        	}
+        		
+        	
 			dummy.updateDataSet();
 			
 			counter++;

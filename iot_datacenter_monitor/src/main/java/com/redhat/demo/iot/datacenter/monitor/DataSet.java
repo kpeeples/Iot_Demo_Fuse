@@ -1,16 +1,19 @@
 package com.redhat.demo.iot.datacenter.monitor;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "dataSet")
-@XmlType(propOrder = { "timestamp", "deviceType", "deviceID", "payload","required", "errorCode", "errorMessage" })
+@XmlType(propOrder = { "timestamp", "deviceType", "deviceID", "payload","required","average", "errorCode", "errorMessage" })
 public class DataSet {
 	private String	timestamp;
 	private int		deviceType;
 	private int		deviceID;	
 	private	int		payload;
 	private int		required;
+	private	float	average;
 	private String 	errorMessage;
 	private int  	errorCode;
 	
@@ -21,15 +24,17 @@ public class DataSet {
 		this.deviceID	= 0;
 		this.payload	= 0;
 		this.required	= 0;
+		this.average	= 0;
 	}
 	
-	public DataSet(String time, int devType, int devID, int pay, int required)
+	public DataSet(String time, int devType, int devID, int pay, int required, float average)
 	{
 		this.timestamp 	= time;
 		this.deviceType = devType;
 		this.deviceID	= devID;
 		this.payload	= pay;
 		this.required	= required;
+		this.average	= average;
 	}
 
 	/**
@@ -116,6 +121,14 @@ public class DataSet {
 
 	public void setErrorCode(int errorCode) {
 		this.errorCode = errorCode;
+	}
+
+	public float getAverage() {
+		return average;
+	}
+
+	public void setAverage(float average) {
+		this.average = average;
 	}
 	
 }

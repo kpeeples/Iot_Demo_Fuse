@@ -6,6 +6,7 @@ postgres:
                 - 80
         ports:
                 - "80:80"
+                - "5432:5432"
 
 iotcontrollertemperature:
         build: ./iot_controller_temperature
@@ -74,3 +75,12 @@ iotdatacentermonitor:
         links:
                - iotdatacenterreceiver
                - iotdatacenterbpm
+
+iotdatacenterdashboard:
+        build: ./iot_datacenter_dashboard
+        hostname: iotdatacenterdashboard
+        links:
+               - postgres
+
+        ports:
+                - "10006:8080"

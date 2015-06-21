@@ -1,6 +1,8 @@
 package com.redhat.demo.iot_controller_data;
 
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 import javax.xml.bind.JAXBContext;
@@ -14,7 +16,10 @@ public class DummyDataGenerator {
 	public void createInitialDataSet(int devType, int devID, int pay ) {
 		tempSet = new DataSet();
 		
-		tempSet.setTimestamp( String.valueOf( System.nanoTime() ));
+		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyy HH:mm:ss SSS");
+		Date timeNow = new Date();
+		
+		tempSet.setTimestamp( format.format(timeNow) );
 		tempSet.setDeviceType(devType);
 		tempSet.setDeviceID(devID);
 		tempSet.setPayload(pay);
@@ -23,8 +28,11 @@ public class DummyDataGenerator {
 	
 	public void updateDataSet() {
 		Random random = new Random();
+
+		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyy HH:mm:ss SSS");
+		Date timeNow = new Date();
 		
-		tempSet.setTimestamp( String.valueOf( System.nanoTime() ));
+		tempSet.setTimestamp( format.format(timeNow) );
 		
 		int randValue = random.nextInt(1000);
 		
@@ -42,6 +50,18 @@ public class DummyDataGenerator {
 	
 	public String getDataSetXML() {
 		return jaxbObjectToXML();
+	}
+	
+	public String getDataSetCSV() {
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append( tempSet.getDeviceType() ).append(", ");
+		sb.append( tempSet.getDeviceID() ).append(", ");
+		sb.append( tempSet.getPayload() ).append(", ");
+		sb.append( tempSet.getTimestamp() ).append(", ");
+		sb.append( tempSet.getCount() );
+		
+		return sb.toString();
 	}
 	
 	private String jaxbObjectToXML( ) {

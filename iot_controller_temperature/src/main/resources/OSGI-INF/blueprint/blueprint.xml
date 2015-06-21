@@ -18,7 +18,7 @@
   <camelContext xmlns="http://camel.apache.org/schema/blueprint">
   <route id="controller_receive_temperature">
     <from uri="activemq:queue:message.to.temperature"/>
-    <log message="Controller_Temperature ${body}"/>
+    <log message="${body}"/>
     <to uri="activemq:queue:message.to.cep"/>
   </route>
 </camelContext>

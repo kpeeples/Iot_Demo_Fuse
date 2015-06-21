@@ -3,14 +3,17 @@ package com.redhat.demo.iot.controller.receiver.data;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.apache.camel.dataformat.bindy.annotation.CsvRecord;
+import org.apache.camel.dataformat.bindy.annotation.DataField;
+
 @XmlRootElement(name = "dataSet")
 @XmlType(propOrder = { "timestamp", "deviceType", "deviceID", "count", "payload","required" })
 public class DataSet {
-	private String	timestamp;
 	private int		deviceType;
-	private int		deviceID;	
-	private int		count;
+	private int		deviceID;
 	private	int		payload;
+	private String	timestamp;
+	private int		count;
 	private int		required;
 	
 	public DataSet()

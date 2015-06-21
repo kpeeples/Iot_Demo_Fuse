@@ -24,8 +24,8 @@ RUN chown -R psteiner:psteiner $HOME
 # continue as 'psteiner'
 USER psteiner
 
-RUN chmod +x $HOME/tmp/install.sh
-RUN chmod +x $HOME/run.sh
+RUN chmod +x $HOME/tmp/install.sh && \
+    chmod +x $HOME/run.sh
 
 # run the helper_install script
 WORKDIR $HOME/tmp

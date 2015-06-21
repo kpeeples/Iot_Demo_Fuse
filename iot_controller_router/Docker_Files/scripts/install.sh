@@ -13,11 +13,14 @@ sed -i "s/=amq/=$BROKER_NAME/" $HOME/$FUSE_LOCATION/etc/org.fusesource.mq.fabric
 echo "Start Fuse and wait for start procedure to end"
 $HOME/$FUSE_LOCATION/bin/start
 
+echo "Giving Fuse a little time to start"
+sleep 20
+
 $HOME/$FUSE_LOCATION/bin/status
 while [ "$?" != "0" ]
 do
-   echo "."
    sleep 10
+   echo "Checking if Fuse has now started"
    $HOME/$FUSE_LOCATION/bin/status
 done
 

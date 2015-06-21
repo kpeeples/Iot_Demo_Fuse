@@ -52,11 +52,11 @@ public class App
 		
 		while ( 1 ==1 ) {
 			messageFromQueue = consumer.run(10000);
-						
+									
 			if ( messageFromQueue != null ) {
-				
-	            System.out.println("Received message with content " + messageFromQueue);
 	
+				System.out.println("iot_contoller_cep message = "+messageFromQueue);
+				
 	            // Convert TextMessage to DataSet via jaxb unmarshalling
 	            JAXBContext jaxbContext = JAXBContext.newInstance(DataSet.class);
 	            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -64,10 +64,7 @@ public class App
 	            StringReader reader = new StringReader( messageFromQueue );
 	            DataSet event = (DataSet) unmarshaller.unmarshal(reader);
 	            
-	            event = cepServer.insert( event);
-	            System.out.println(" Result from CEP =  " + event.getRequired());
-	            System.out.println(" Average =  " + event.getAverage());
-	 	            
+	            event = cepServer.insert( event);	 	            
 	            
 	            // Convert changed message back to XML
 	            String result;
@@ -83,12 +80,6 @@ public class App
 	            
 	            if ( event.getRequired() == 1)
 	            	producer.run(result);
-	            
-	            System.out.println("###############################################################");
-	            System.out.println();
-	            System.out.println();
-	            System.out.println();
-	            
 	            
 			}
             

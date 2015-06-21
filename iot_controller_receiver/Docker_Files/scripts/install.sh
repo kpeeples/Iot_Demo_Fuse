@@ -17,7 +17,7 @@ $HOME/$FUSE_LOCATION/bin/status
 while [ "$?" != "0" ]
 do
    echo "."
-   sleep 10
+   sleep 20
    $HOME/$FUSE_LOCATION/bin/status
 done
 

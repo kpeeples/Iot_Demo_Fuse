@@ -38,12 +38,10 @@ public class App
 		BRMSServer brmsServer = new BRMSServer();
 		
 		while ( 1 ==1 ) {
-			messageFromQueue = consumer.run(10000);
+			messageFromQueue = consumer.run(20000);
 			
 			if ( messageFromQueue != null ) {
 				
-	            log.info("Received message with content " + messageFromQueue);
-	
 	            // Convert TextMessage to DataSet via jaxb unmarshalling
 	            JAXBContext jaxbContext = JAXBContext.newInstance(DataSet.class);
 	            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -55,12 +53,15 @@ public class App
 	                     
 	            if ( event.getRequired() == 1 ) {
 	            	
+	            	System.out.println("Need to call BPM Process!");
+	            	
 	            	BPMClient bpmClient = new BPMClient();
-	            	bpmClient.doCall("http://localhost:8080/business-central", 
+	            	bpmClient.doCall("http://iotdatacenterbpm:8080/business-central", 
 	            				     "com.redhat.demo.iot.datacenter:HumanTask:1.0", 
 	            				     "psteiner", "change12_me",
 	            				     event);
-	            	
+	
+
 	            } 
 	            	            
 			}

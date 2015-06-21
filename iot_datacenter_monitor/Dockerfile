@@ -13,8 +13,8 @@ ADD target/$APPL $HOME/tmp/
 ADD Docker_Files/scripts/run.sh $HOME/tmp/
 
 # make 'psteiner' the owner
-RUN chown -R psteiner:psteiner $HOME/tmp
-RUN chmod u+x $HOME/tmp/run.sh
+RUN chown -R psteiner:psteiner $HOME/tmp && \
+    chmod u+x $HOME/tmp/run.sh
 
 # switch to psteiner
 USER psteiner

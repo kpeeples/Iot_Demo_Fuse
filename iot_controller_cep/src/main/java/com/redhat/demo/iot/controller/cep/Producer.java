@@ -34,8 +34,6 @@ public class Producer {
     
         Message message = session.createTextMessage( data );
         
-        System.out.println("Sending " + data);
-        
         producer.send(message);
 	 }
  

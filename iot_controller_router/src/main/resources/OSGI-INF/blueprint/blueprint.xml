@@ -29,7 +29,7 @@
   <camelContext xmlns="http://camel.apache.org/schema/blueprint">
   <route id="controller_receive_router">
     <from uri="activemqLocal:queue:message.to.router"/>
-	<log message="Controller_Router ${body}"/>
+    <log message="${body}"/>
     <choice>
       <when>
         <xpath>dataSet/deviceType = "0"</xpath>

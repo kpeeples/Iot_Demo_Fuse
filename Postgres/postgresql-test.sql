@@ -2,7 +2,7 @@
 CREATE TABLE "temperature" (
     pid                  SERIAL PRIMARY KEY,
     deviceID            DECIMAL,
-    timestamp            BIGINT,
+    timestamp            VARCHAR,
     value                INTEGER,
     average		 REAL
 );

@@ -1,12 +1,14 @@
 package com.redhat.demo.iot.controller.cep.data;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "dataSet")
 @XmlType(propOrder = { "timestamp", "deviceType", "deviceID", "count", "payload","required", "average" })
 public class DataSet {
-	private String	timestamp;
+	private Date	timestamp;
 	private int		deviceType;
 	private int		deviceID;	
 	private int		count;
@@ -16,7 +18,7 @@ public class DataSet {
 	
 	public DataSet()
 	{
-		this.timestamp 	= "";
+		this.timestamp 	= new Date();
 		this.deviceType = 0;
 		this.deviceID	= 0;
 		this.count		= 0;
@@ -25,7 +27,7 @@ public class DataSet {
 		this.average	= 0;
 	}
 	
-	public DataSet(String time, int devType, int devID, int count, int pay, int required)
+	public DataSet(Date time, int devType, int devID, int count, int pay, int required)
 	{
 		this.timestamp 	= time;
 		this.deviceType = devType;
@@ -52,14 +54,14 @@ public class DataSet {
 	/**
 	 * @return the timestamp
 	 */
-	public String getTimestamp() {
+	public Date getTimestamp() {
 		return timestamp;
 	}
 
 	/**
 	 * @param timestamp the timestamp to set
 	 */
-	public void setTimestamp(String timestamp) {
+	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
 

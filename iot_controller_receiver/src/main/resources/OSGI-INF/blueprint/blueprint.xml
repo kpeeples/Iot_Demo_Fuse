@@ -28,8 +28,23 @@
   <camelContext xmlns="http://camel.apache.org/schema/blueprint">
   <route id="controller_receive_message">
     <from uri="activemqLocal:queue:message.receive"/>
-    <log message="Controller_Receiver ${body}"/>
-    <to uri="activemqRemote:queue:message.to.router"/>
+    <choice>
+      <when>
+        <simple>${body} contains '?xml'</simple>
+        <to uri="activemqRemote:queue:message.to.router"/>
+      </when>
+      <otherwise>
+        <unmarshal>
+          <bindy type="Csv" classType="com.redhat.demo.iot.controller.receiver.data.DataSetString"/>
+        </unmarshal>
+        <marshal>
+          <jaxb contextPath="com.redhat.demo.iot.controller.receiver.data"/>
+        </marshal>
+        <convertBodyTo type="java.lang.String"/>
+        <log message="${body}"/>
+        <to uri="activemqRemote:queue:message.to.router"/>
+      </otherwise>
+    </choice>
   </route>
 </camelContext>
 

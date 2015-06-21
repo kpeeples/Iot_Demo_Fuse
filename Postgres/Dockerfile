@@ -59,11 +59,11 @@ RUN mv $HOME/pgpass /root/.pgpass && \
 RUN echo "listen_addresses='*'" >> $PGDATA/postgresql.conf
 RUN echo "" >> $PGDATA/postgresql.conf
 
-EXPOSE 5432 80
+EXPOSE 5432 80 
 
 USER root
 
 CMD $HOME/postgresql-populate.sh
 
-# Build command -> docker build --rm -t psteiner/postgres .
-# run command -> docker run  -p 5432:5432 -p 80:80 -d psteiner/postgres
+# Build command -> docker build --rm -t workspacefuse_postgres .
+# run command -> docker run   -p 5432:5432 -p 80:80 -d workspacefuse_postgres

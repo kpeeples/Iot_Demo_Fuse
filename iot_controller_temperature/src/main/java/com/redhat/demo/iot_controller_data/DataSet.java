@@ -1,5 +1,7 @@
 package com.redhat.demo.iot_controller_data;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 

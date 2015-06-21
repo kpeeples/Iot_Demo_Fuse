@@ -156,6 +156,11 @@
       <artifactId>activemq-pool</artifactId>
       <version>5.9.0.redhat-610379</version>
     </dependency>
+     <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-pool</artifactId>
+      <version>5.9.0.redhat-610379</version>
+    </dependency>
 
     <!-- Testing & Camel Plugin -->
     <dependency>
