@@ -30,7 +30,10 @@ As for now, this demo includes:
   ** route message based on source to be able to apply different procedures
   ** complex event processing to filter messages
  * datacenter functionality to
-  **  store filtered / receiver data in a Postgresql
+  ** apply business rules to decide if data is important and needs saving
+  ** store selected data in a Postgresql database
+  ** validate data agains business rules and create Human-Task based alert if required
+  ** provide a graphical business dashboard to see data
 
 Communication between edge and controller, as well as controller internal communication
 is implemented via JMS messaging.
@@ -52,6 +55,8 @@ As of now, it works with the following steps:
    * if random number is >= 990 increase data by 1
  4. back to 2.
 
+ You can choose if the messages are supposed to be delivered as XML or CSV.
+
 === Controller
 
 image::./pictures/Controller.png[]
@@ -59,7 +64,7 @@ image::./pictures/Controller.png[]
 The controller does the following
 
  1. receive data record via JMS
- 2. transform data from sensor-specific format to xml ( not yet required )
+ 2. transform data from sensor-specific format to xml, if delivered as CSV
  3. route data based on sensor type
  4. use complex event processing ( CEP ) to filter messages. Currently we only
        have one rule, which deletes messages if the value is the same as in the
@@ -79,6 +84,7 @@ each running in it's own container
  2. store the received data in a database ( Postgresql )
  3. forward message to a monitor, who checks the data if an alert needs to be raised. This alert
  is implemented by starting business-process with a human task.
+ 4. provide graphical dashboard to see data
 
 == Runtime Environment
 The entire functionality is divided into various services, each running in its
@@ -118,13 +124,19 @@ git clone https://github.com/PatrickSteiner/Iot_Demo_Fuse
 I have not included the various JBoss products in the git repository, so it will be your obligation to retrieve them and to place them in their directories.
 
 	* `jboss-fuse-full-6.1.1.redhat-412.zip` into `./Fuse/Docker_Files/software`
+  * `jboss-dv-installer-6.1.0.redhat-3.jar` into `./iot_datacenter_dashboard/Docker_Files/software`
+  * `boss-bpmsuite-6.1.0.GA-deployable-eap6.x.zip` into `./iot_datacenter_bpm/Docker_Files/software`
+  * `jboss-eap-6.4.0.zip` into `./iot_datacenter_bpm/Docker_Files/software`
+
+If you are a developer, you can download the products from http://www.jboss.org[JBoss.org]. If you are
+are Red Hat customer, do so from the http://access.redhat.com[Customer Portal].
 
 === Building the demo
 I have tried to make the deployment of the entire IoT Demo as convenient as possibe.
 All you need to do is
 
   * make sure you have all required pre-requisites
-  * downloaded and places the Red Hat JBoss Fuse installable
+  * downloaded and places the required Red Hat products into the documented directories
   * run `./build.sh`
 
 == Starting the environment
@@ -145,7 +157,36 @@ the following dashboads
 |http://localhost:10003/hawtio | Datacenter-Receiver Management Console | admin / admin
 |http://localhost/phpPgAdmin/ | phpPGAdmin on DB-Server | psteiner / change12_me
 |http://localhost:10004/business-central | JBoss BPM - Business-Central | psteiner / change12_me
+|http://localhost:10006/dashboard/ | JBoss Data Virtualization - Dashboard-Builder | dashboardAdmin / change12_me
 |======================
+
+== Enabling the Business Process Management Layer
+
+Unfortunately I have not yet found a way to automatically deploy my business processes.
+The process and all required artifacts are provided, but need to be deployed into
+the runtime container from JBoss BPM Suite.
+
+The following sections will describe the required actions.
+
+ * Logon
+
+image::./pictures/BPM_Logon.png[]
+
+ * Go to Authoring panel of BPM Suite
+
+image::./pictures/BPM_Authoring.png[]
+
+ * Make sure that you selected the correct project and click the `Open Project Editor` button
+
+image::./pictures/BPM_ProjectEditor.png[]
+
+ * Build and Deploy the project
+
+image::./pictures/BPM_Build.png[]
+
+ * Done!
+
+
 
 == Creating testdata
 I have tried to create a "general purpose" producer. As of now, he will produce
@@ -172,6 +213,7 @@ There are system properties which you can use to alter the behavior of the clien
 |initialValue | value to start simulation with | 70
 |count | How many messages to produce | 1
 |waitime | Seconds to wait between messages | 1
+|messageType | XML or CSV based message | XML
 |======================
 
 For convenience I created a few simple ( very simple ) scripts which do the following
@@ -219,7 +261,4 @@ Controller-Router will understand the following device types:
 
 = To Do
 
- * Introduce real transformation in Controller
- * Add the Datacenter-Layer with
-   ** Dashboard
  * Add MQTT based edge
