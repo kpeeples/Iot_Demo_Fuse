@@ -26,14 +26,15 @@ USER psteiner
 
 RUN java -jar $HOME/tmp/jboss-dv-installer-6.1.0.redhat-3.jar $HOME/tmp/Install_Log.xml
 
-RUN mv $HOME/tmp/appl* $HOME/DV-6.1.0/jboss-eap-6.3/standalone/configuration
-RUN curl -o $HOME/DV-6.1.0/jboss-eap-6.3/standalone/deployments/postgresql-9.3-1101.jdbc41.jar https://jdbc.postgresql.org/download/postgresql-9.3-1103.jdbc41.jar
+RUN mv $HOME/tmp/appl* $HOME/DV-6.1.0/jboss-eap-6.3/standalone/configuration && \
+    mv $HOME/tmp/standalone.xml $HOME/DV-6.1.0/jboss-eap-6.3/standalone/configuration && \
+    curl -o $HOME/DV-6.1.0/jboss-eap-6.3/standalone/deployments/postgresql-9.3-1103.jdbc41.jar https://jdbc.postgresql.org/download/postgresql-9.3-1103.jdbc41.jar
 
 # start.sh
-RUN echo "#!/bin/sh"
-RUN echo "echo JBoss Data Virtualization Start script" >> $HOME/run.sh
-RUN echo "$HOME/DV-6.1.0/jboss-eap-6.3/bin/standalone.sh -c standalone.xml -b 0.0.0.0 -bmanagement 0.0.0.0" >> $HOME/run.sh
-RUN chmod +x $HOME/run.sh
+RUN echo "#!/bin/sh" && \
+    echo "echo JBoss Data Virtualization Start script" >> $HOME/run.sh && \
+    echo "$HOME/DV-6.1.0/jboss-eap-6.3/bin/standalone.sh -c standalone.xml -b 0.0.0.0 -bmanagement 0.0.0.0" >> $HOME/run.sh && \
+    chmod +x $HOME/run.sh
 
 # Clean up
 RUN rm -rf $HOME/tmp/*
