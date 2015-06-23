@@ -4,7 +4,7 @@ export deviceType="1"
 export deviceID="1"
 export initialValue="70"
 export count="50"
-export waitTime="0"
+export waitTime="1"
 export messageFormat="XML"
 
 echo "Starting the producer to send messages "
