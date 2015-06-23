@@ -5,7 +5,7 @@ import com.redhat.demo.iot.datacenter.monitor.DataSet;
 rule "TemperatureToHigh"
 	lock-on-active true
 	when
-		$t : DataSet( deviceType == 1, payload > 80 )
+		$t : DataSet( deviceType == 1, payload > (average + 10) )
 	then
 		$t.setRequired(1);
 		$t.setErrorCode(1);
@@ -17,7 +17,7 @@ end
 rule "TemperatureToLow"
 	lock-on-active true
 	when
-		$t : DataSet( deviceType == 1, payload < 60 )
+		$t : DataSet( deviceType == 1, payload < (average - 10) )
 	then
 		$t.setRequired(1);
 		$t.setErrorCode(2);

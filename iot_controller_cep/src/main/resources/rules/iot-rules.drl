@@ -26,8 +26,8 @@ end
 
 rule "Calculate Average"
 when
-	$dataset : DataSet()  from entry-point IOTStream
-    Number( $average : floatValue ) from accumulate( $data: DataSet( $payload:payload ) over window:time( 10m ) from entry-point IOTStream, 
+	$dataset : DataSet( $id:deviceID )  from entry-point IOTStream
+    Number( $average : floatValue ) from accumulate( $data: DataSet( deviceID == $id, $payload:payload ) over window:time( 10m ) from entry-point IOTStream, 
         average( $payload ) )
 then
 	$dataset.setAverage($average);

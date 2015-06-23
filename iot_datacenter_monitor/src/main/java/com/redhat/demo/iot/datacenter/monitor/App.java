@@ -48,7 +48,8 @@ public class App
 	
 	            StringReader reader = new StringReader( messageFromQueue );
 	            DataSet event = (DataSet) unmarshaller.unmarshal(reader);
-	            
+		
+		    event.setRequired(0);	            
 	            event = brmsServer.insert( event);
 	                     
 	            if ( event.getRequired() == 1 ) {

@@ -55,8 +55,6 @@ public class App
 									
 			if ( messageFromQueue != null ) {
 	
-				System.out.println("iot_contoller_cep message = "+messageFromQueue);
-				
 	            // Convert TextMessage to DataSet via jaxb unmarshalling
 	            JAXBContext jaxbContext = JAXBContext.newInstance(DataSet.class);
 	            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
