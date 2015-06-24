@@ -1,6 +1,14 @@
 #!/bin/bash
 
 echo "-Building deloyables"
+
+
+echo "-- client"
+pushd . > /dev/null
+cd producer
+mvn clean install > /dev/null
+popd > /dev/null
+
 echo "-- iot_controller_receiver"
 pushd . > /dev/null
 cd iot_controller_receiver
