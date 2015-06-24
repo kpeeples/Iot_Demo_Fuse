@@ -21,6 +21,8 @@ do
    $HOME/$FUSE_LOCATION/bin/status
 done
 
+sleep 10
+
 echo "Now let's deploy the bundle"
 echo $HOME/$FUSE_LOCATION/bin/client "osgi:install -s file://$HOME/tmp/$BUNDLE_NAME"
 $HOME/$FUSE_LOCATION/bin/client "osgi:install -s file://$HOME/tmp/$BUNDLE_NAME"

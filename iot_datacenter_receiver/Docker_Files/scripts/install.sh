@@ -17,6 +17,8 @@ do
    $HOME/$FUSE_LOCATION/bin/status
 done
 
+sleep 10
+
 echo "Now let's deploy the bundle and some prereqs"
 $HOME/$FUSE_LOCATION/bin/client "osgi:install -s wrap:mvn:commons-dbcp/commons-dbcp/1.4"
 $HOME/$FUSE_LOCATION/bin/client "osgi:install -s wrap:mvn:org.postgresql/postgresql/9.3-1102-jdbc41"
