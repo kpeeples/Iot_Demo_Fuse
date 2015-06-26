@@ -13,8 +13,6 @@ import com.redhat.demo.iot_controller_data.DummyDataGenerator;
  */
 public class App 
 {
-	public static String brokerURL = "tcp://localhost:61616";
-	
 	
 	// Default Values for message producer
     private static final String	DEFAULT_DEVICETYPE   = "1";
@@ -23,16 +21,15 @@ public class App
     private static final String DEFAULT_COUNT 		 = "1";
     private static final String DEFAULT_WAIT		 = "1";
     private static final String DEFAULT_FORMAT		 = "XML";
+    private static final String DEFAULT_RECEIVER	= "localhost";
 
 	 
     public static void main( String[] args ) throws Exception
     {
     	
-    	com.redhat.demo.iot_controller_data.DummyDataGenerator dummy = null;
+    	DummyDataGenerator dummy = null;
         
-        // setup the connection to ActiveMQ
-    	ConnectionFactory factory = new ActiveMQConnectionFactory("admin", "admin", brokerURL);
-    	
+   	
     	// Create data to send
         dummy = new DummyDataGenerator();
         
@@ -42,10 +39,16 @@ public class App
         int count = Integer.parseInt(System.getProperty("count", DEFAULT_COUNT));
         int waitTime = Integer.parseInt(System.getProperty("waitTime", DEFAULT_WAIT));
         String messageFormat = System.getProperty("messageFormat",DEFAULT_FORMAT);
+        String brokerURL = "tcp://" + System.getProperty("receiverURL",DEFAULT_RECEIVER) + ":61616" ;
+        
+ //  System.out.println(brokerURL);     
         
         dummy.createInitialDataSet(devType, devID, initialValue); 
 
-        Producer producer = new Producer(factory, "message.receive");
+        // setup the connection to ActiveMQ
+    	ConnectionFactory factory = new ActiveMQConnectionFactory("admin", "admin", brokerURL);
+        
+        Producer producer = new Producer(factory, "message.receive" );
         
         System.out.println(dummy.getDataSetCSV());
         
