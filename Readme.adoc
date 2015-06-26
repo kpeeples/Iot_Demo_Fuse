@@ -141,6 +141,9 @@ All you need to do is
 
 == Starting the environment
 
+**Please note that you should have at least 12GB memory to run this environment
+on one server!**
+ 
 Once you have completed the previous step, you can run the demo in your own
 environment. Simply use `./docker-compose up` to start all images with the
 required parameter and configurations.
