@@ -7,8 +7,7 @@ import org.apache.camel.dataformat.bindy.annotation.CsvRecord;
 import org.apache.camel.dataformat.bindy.annotation.DataField;
 
 @XmlRootElement(name = "dataSet")
-@XmlType(propOrder = { "timestamp", "deviceType", "deviceID", "count", "payload","required" })
-//@CsvRecord(separator = ",", skipFirstLine = true, crlf = "UNIX")
+@XmlType(propOrder = { "timestamp", "deviceType", "deviceID", "count", "payload","unit", "required" })
 @CsvRecord(separator = ",")
 public class DataSetString {
 	@DataField(pos = 1, required = true) 
@@ -17,11 +16,13 @@ public class DataSetString {
 	private String	deviceID;
 	@DataField(pos = 3, required = true) 
 	private	String	payload;
-	@DataField(pos = 4, required = true)
-	private String	timestamp;
+	@DataField(pos = 4, required = true) 
+	private	String	unit;
 	@DataField(pos = 5, required = true)
+	private String	timestamp;
+	@DataField(pos = 6, required = true)
 	private String	count;
-	@DataField(pos = 6)
+	@DataField(pos = 7)
 	private String	required;
 	
 	public DataSetString()
@@ -31,16 +32,18 @@ public class DataSetString {
 		this.deviceID	= "";
 		this.count		= "";
 		this.payload	= "";
+		this.unit		= "";
 		this.required	= "";
 	}
 	
-	public DataSetString(String time, String devType, String devID, String count, String pay, String required)
+	public DataSetString(String time, String devType, String devID, String count, String pay, String unit, String required)
 	{
 		this.timestamp 	= time;
 		this.deviceType = devType;
 		this.deviceID	= devID;
 		this.count		= count;
 		this.payload	= pay;
+		this.unit		= unit;
 		this.required	= required;
 	}
 
@@ -120,6 +123,14 @@ public class DataSetString {
 
 	public void setCount(String count) {
 		this.count = count;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 	
 	

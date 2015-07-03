@@ -1,0 +1,44 @@
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building IOT Controller Temperature 1.0.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ controller_temperature ---
+[INFO] Deleting /home/psteiner/workspace_fuse/iot_controller_temperature/target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ controller_temperature ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ controller_temperature ---
+[INFO] Compiling 2 source files to /home/psteiner/workspace_fuse/iot_controller_temperature/target/classes
+[INFO] 
+[INFO] --- maven-bundle-plugin:2.3.7:manifest (bundle-manifest) @ controller_temperature ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ controller_temperature ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/psteiner/workspace_fuse/iot_controller_temperature/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.5.1:testCompile (default-testCompile) @ controller_temperature ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.13-SONATYPE:test (default-test) @ controller_temperature ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- maven-bundle-plugin:2.3.7:bundle (default-bundle) @ controller_temperature ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ controller_temperature ---
+[INFO] Installing /home/psteiner/workspace_fuse/iot_controller_temperature/target/controller_temperature-1.0.0-SNAPSHOT.jar to /media/psf/Home/.m2/repository/com/redhat/demo/iot/controller/temperature/controller_temperature/1.0.0-SNAPSHOT/controller_temperature-1.0.0-SNAPSHOT.jar
+[INFO] Installing /home/psteiner/workspace_fuse/iot_controller_temperature/pom.xml to /media/psf/Home/.m2/repository/com/redhat/demo/iot/controller/temperature/controller_temperature/1.0.0-SNAPSHOT/controller_temperature-1.0.0-SNAPSHOT.pom
+[INFO] 
+[INFO] --- maven-bundle-plugin:2.3.7:install (default-install) @ controller_temperature ---
+[INFO] Installing com/redhat/demo/iot/controller/temperature/controller_temperature/1.0.0-SNAPSHOT/controller_temperature-1.0.0-SNAPSHOT.jar
+[INFO] Writing OBR metadata
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 3.190 s
+[INFO] Finished at: 2015-07-03T22:07:19+02:00
+[INFO] Final Memory: 19M/323M
+[INFO] ------------------------------------------------------------------------

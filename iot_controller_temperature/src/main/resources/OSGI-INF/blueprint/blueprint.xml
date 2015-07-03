@@ -5,21 +5,46 @@
        http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
        http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
 
-      <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent" >
-        <property name="connectionFactory">
-          <bean class="org.apache.activemq.ActiveMQConnectionFactory">
-            <property name="brokerURL" value="vm://localhost?create=false&amp;waitForStart=10000" />
-            <property name="userName" value="admin"/>
-            <property name="password" value="admin"/>
-          </bean>
-        </property>
+    <bean id="activemqLocal" class="org.apache.activemq.camel.component.ActiveMQComponent" >
+      <property name="connectionFactory">
+        <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+          <property name="brokerURL" value="vm://localhost?create=false&amp;waitForStart=10000" />
+          <property name="userName" value="admin"/>
+          <property name="password" value="admin"/>
+        </bean>
+       </property>
     </bean>
 
+    <bean id="activemqRemote" class="org.apache.activemq.camel.component.ActiveMQComponent" >
+      <property name="connectionFactory">
+        <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+          <property name="brokerURL" value="tcp://iotcontrollertemperature:61616" />
+          <property name="userName" value="admin"/>
+          <property name="password" value="admin"/>
+        </bean>
+       </property>
+    </bean>
+
+
   <camelContext xmlns="http://camel.apache.org/schema/blueprint">
-  <route id="controller_receive_temperature">
-    <from uri="activemq:queue:message.to.temperature"/>
+  <route id="controller_receive_router">
+    <from uri="activemqLocal:queue:message.to.temperature"/>
     <log message="${body}"/>
-    <to uri="activemq:queue:message.to.cep"/>
+    <choice>
+      <when>
+        <xpath>dataSet/unit = "C"</xpath>
+        <log message="Temperature received as Celsius, so nothing to do"/>
+        <to uri="activemqLocal:queue:message.to.cep"/>
+      </when>
+      <otherwise>
+        <log message="Temperature received as Fahrenheit, we need to convert the data"/>
+        <bean method="f2c" beanType="com.redhat.demo.iot.controller.temperature.Converter"/>
+    	<log message="${body}"/>
+    	<convertBodyTo type="java.lang.String"/>
+        <to uri="activemqLocal:queue:message.to.cep?jmsMessageType=Text"/>
+      </otherwise>
+    </choice>
+
   </route>
 </camelContext>
 

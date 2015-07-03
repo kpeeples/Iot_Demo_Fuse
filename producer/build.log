@@ -1,0 +1,211 @@
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building producer 0.1
+[INFO] ------------------------------------------------------------------------
+[WARNING] The artifact javax.xml:jaxb-api:jar:2.1 has been relocated to javax.xml.bind:jaxb-api:jar:2.1
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ producer ---
+[INFO] Deleting /home/psteiner/workspace_fuse/producer/target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ producer ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/psteiner/workspace_fuse/producer/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ producer ---
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 4 source files to /home/psteiner/workspace_fuse/producer/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ producer ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/psteiner/workspace_fuse/producer/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.5.1:testCompile (default-testCompile) @ producer ---
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 1 source file to /home/psteiner/workspace_fuse/producer/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ producer ---
+[INFO] Surefire report directory: /home/psteiner/workspace_fuse/producer/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running net.timico.messaging.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ producer ---
+[INFO] Building jar: /home/psteiner/workspace_fuse/producer/target/iot_producer.jar
+[INFO] 
+[INFO] --- maven-assembly-plugin:2.2-beta-5:single (default) @ producer ---
+[WARNING] While downloading javax.xml:jaxb-api:2.1
+  This artifact has been relocated to javax.xml.bind:jaxb-api:2.1.
+
+
+[WARNING] While downloading javax.xml:jaxb-api:2.1
+  This artifact has been relocated to javax.xml.bind:jaxb-api:2.1.
+
+
+[INFO] META-INF/ already added, skipping
+[INFO] META-INF/MANIFEST.MF already added, skipping
+[INFO] javax/ already added, skipping
+[INFO] javax/jms/ already added, skipping
+[INFO] javax/jms/BytesMessage.class already added, skipping
+[INFO] javax/jms/Connection.class already added, skipping
+[INFO] javax/jms/ConnectionConsumer.class already added, skipping
+[INFO] javax/jms/ConnectionFactory.class already added, skipping
+[INFO] javax/jms/ConnectionMetaData.class already added, skipping
+[INFO] javax/jms/DeliveryMode.class already added, skipping
+[INFO] javax/jms/Destination.class already added, skipping
+[INFO] javax/jms/ExceptionListener.class already added, skipping
+[INFO] javax/jms/IllegalStateException.class already added, skipping
+[INFO] javax/jms/InvalidClientIDException.class already added, skipping
+[INFO] javax/jms/InvalidDestinationException.class already added, skipping
+[INFO] javax/jms/InvalidSelectorException.class already added, skipping
+[INFO] javax/jms/JMSException.class already added, skipping
+[INFO] javax/jms/JMSSecurityException.class already added, skipping
+[INFO] javax/jms/MapMessage.class already added, skipping
+[INFO] javax/jms/Message.class already added, skipping
+[INFO] javax/jms/MessageConsumer.class already added, skipping
+[INFO] javax/jms/MessageEOFException.class already added, skipping
+[INFO] javax/jms/MessageFormatException.class already added, skipping
+[INFO] javax/jms/MessageListener.class already added, skipping
+[INFO] javax/jms/MessageNotReadableException.class already added, skipping
+[INFO] javax/jms/MessageNotWriteableException.class already added, skipping
+[INFO] javax/jms/MessageProducer.class already added, skipping
+[INFO] javax/jms/ObjectMessage.class already added, skipping
+[INFO] javax/jms/Queue.class already added, skipping
+[INFO] javax/jms/QueueBrowser.class already added, skipping
+[INFO] javax/jms/QueueConnection.class already added, skipping
+[INFO] javax/jms/QueueConnectionFactory.class already added, skipping
+[INFO] javax/jms/QueueReceiver.class already added, skipping
+[INFO] javax/jms/QueueRequestor.class already added, skipping
+[INFO] javax/jms/QueueSender.class already added, skipping
+[INFO] javax/jms/QueueSession.class already added, skipping
+[INFO] javax/jms/ResourceAllocationException.class already added, skipping
+[INFO] javax/jms/ServerSession.class already added, skipping
+[INFO] javax/jms/ServerSessionPool.class already added, skipping
+[INFO] javax/jms/Session.class already added, skipping
+[INFO] javax/jms/StreamMessage.class already added, skipping
+[INFO] javax/jms/TemporaryQueue.class already added, skipping
+[INFO] javax/jms/TemporaryTopic.class already added, skipping
+[INFO] javax/jms/TextMessage.class already added, skipping
+[INFO] javax/jms/Topic.class already added, skipping
+[INFO] javax/jms/TopicConnection.class already added, skipping
+[INFO] javax/jms/TopicConnectionFactory.class already added, skipping
+[INFO] javax/jms/TopicPublisher.class already added, skipping
+[INFO] javax/jms/TopicRequestor.class already added, skipping
+[INFO] javax/jms/TopicSession.class already added, skipping
+[INFO] javax/jms/TopicSubscriber.class already added, skipping
+[INFO] javax/jms/TransactionInProgressException.class already added, skipping
+[INFO] javax/jms/TransactionRolledBackException.class already added, skipping
+[INFO] javax/jms/XAConnection.class already added, skipping
+[INFO] javax/jms/XAConnectionFactory.class already added, skipping
+[INFO] javax/jms/XAQueueConnection.class already added, skipping
+[INFO] javax/jms/XAQueueConnectionFactory.class already added, skipping
+[INFO] javax/jms/XAQueueSession.class already added, skipping
+[INFO] javax/jms/XASession.class already added, skipping
+[INFO] javax/jms/XATopicConnection.class already added, skipping
+[INFO] javax/jms/XATopicConnectionFactory.class already added, skipping
+[INFO] javax/jms/XATopicSession.class already added, skipping
+[INFO] META-INF/ already added, skipping
+[INFO] META-INF/MANIFEST.MF already added, skipping
+[INFO] javax/ already added, skipping
+[INFO] META-INF/ already added, skipping
+[INFO] META-INF/MANIFEST.MF already added, skipping
+[INFO] javax/ already added, skipping
+[INFO] javax/xml/ already added, skipping
+[INFO] META-INF/ already added, skipping
+[INFO] META-INF/MANIFEST.MF already added, skipping
+[INFO] META-INF/LICENSE.txt already added, skipping
+[INFO] javax/ already added, skipping
+[INFO] Building jar: /home/psteiner/workspace_fuse/producer/target/iot_producer-jar-with-dependencies.jar
+[INFO] META-INF/ already added, skipping
+[INFO] META-INF/MANIFEST.MF already added, skipping
+[INFO] javax/ already added, skipping
+[INFO] javax/jms/ already added, skipping
+[INFO] javax/jms/BytesMessage.class already added, skipping
+[INFO] javax/jms/Connection.class already added, skipping
+[INFO] javax/jms/ConnectionConsumer.class already added, skipping
+[INFO] javax/jms/ConnectionFactory.class already added, skipping
+[INFO] javax/jms/ConnectionMetaData.class already added, skipping
+[INFO] javax/jms/DeliveryMode.class already added, skipping
+[INFO] javax/jms/Destination.class already added, skipping
+[INFO] javax/jms/ExceptionListener.class already added, skipping
+[INFO] javax/jms/IllegalStateException.class already added, skipping
+[INFO] javax/jms/InvalidClientIDException.class already added, skipping
+[INFO] javax/jms/InvalidDestinationException.class already added, skipping
+[INFO] javax/jms/InvalidSelectorException.class already added, skipping
+[INFO] javax/jms/JMSException.class already added, skipping
+[INFO] javax/jms/JMSSecurityException.class already added, skipping
+[INFO] javax/jms/MapMessage.class already added, skipping
+[INFO] javax/jms/Message.class already added, skipping
+[INFO] javax/jms/MessageConsumer.class already added, skipping
+[INFO] javax/jms/MessageEOFException.class already added, skipping
+[INFO] javax/jms/MessageFormatException.class already added, skipping
+[INFO] javax/jms/MessageListener.class already added, skipping
+[INFO] javax/jms/MessageNotReadableException.class already added, skipping
+[INFO] javax/jms/MessageNotWriteableException.class already added, skipping
+[INFO] javax/jms/MessageProducer.class already added, skipping
+[INFO] javax/jms/ObjectMessage.class already added, skipping
+[INFO] javax/jms/Queue.class already added, skipping
+[INFO] javax/jms/QueueBrowser.class already added, skipping
+[INFO] javax/jms/QueueConnection.class already added, skipping
+[INFO] javax/jms/QueueConnectionFactory.class already added, skipping
+[INFO] javax/jms/QueueReceiver.class already added, skipping
+[INFO] javax/jms/QueueRequestor.class already added, skipping
+[INFO] javax/jms/QueueSender.class already added, skipping
+[INFO] javax/jms/QueueSession.class already added, skipping
+[INFO] javax/jms/ResourceAllocationException.class already added, skipping
+[INFO] javax/jms/ServerSession.class already added, skipping
+[INFO] javax/jms/ServerSessionPool.class already added, skipping
+[INFO] javax/jms/Session.class already added, skipping
+[INFO] javax/jms/StreamMessage.class already added, skipping
+[INFO] javax/jms/TemporaryQueue.class already added, skipping
+[INFO] javax/jms/TemporaryTopic.class already added, skipping
+[INFO] javax/jms/TextMessage.class already added, skipping
+[INFO] javax/jms/Topic.class already added, skipping
+[INFO] javax/jms/TopicConnection.class already added, skipping
+[INFO] javax/jms/TopicConnectionFactory.class already added, skipping
+[INFO] javax/jms/TopicPublisher.class already added, skipping
+[INFO] javax/jms/TopicRequestor.class already added, skipping
+[INFO] javax/jms/TopicSession.class already added, skipping
+[INFO] javax/jms/TopicSubscriber.class already added, skipping
+[INFO] javax/jms/TransactionInProgressException.class already added, skipping
+[INFO] javax/jms/TransactionRolledBackException.class already added, skipping
+[INFO] javax/jms/XAConnection.class already added, skipping
+[INFO] javax/jms/XAConnectionFactory.class already added, skipping
+[INFO] javax/jms/XAQueueConnection.class already added, skipping
+[INFO] javax/jms/XAQueueConnectionFactory.class already added, skipping
+[INFO] javax/jms/XAQueueSession.class already added, skipping
+[INFO] javax/jms/XASession.class already added, skipping
+[INFO] javax/jms/XATopicConnection.class already added, skipping
+[INFO] javax/jms/XATopicConnectionFactory.class already added, skipping
+[INFO] javax/jms/XATopicSession.class already added, skipping
+[INFO] META-INF/ already added, skipping
+[INFO] META-INF/MANIFEST.MF already added, skipping
+[INFO] javax/ already added, skipping
+[INFO] META-INF/ already added, skipping
+[INFO] META-INF/MANIFEST.MF already added, skipping
+[INFO] javax/ already added, skipping
+[INFO] javax/xml/ already added, skipping
+[INFO] META-INF/ already added, skipping
+[INFO] META-INF/MANIFEST.MF already added, skipping
+[INFO] META-INF/LICENSE.txt already added, skipping
+[INFO] javax/ already added, skipping
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ producer ---
+[INFO] Installing /home/psteiner/workspace_fuse/producer/target/iot_producer.jar to /media/psf/Home/.m2/repository/com/redhat/demo/producer/0.1/producer-0.1.jar
+[INFO] Installing /home/psteiner/workspace_fuse/producer/pom.xml to /media/psf/Home/.m2/repository/com/redhat/demo/producer/0.1/producer-0.1.pom
+[INFO] Installing /home/psteiner/workspace_fuse/producer/target/iot_producer-jar-with-dependencies.jar to /media/psf/Home/.m2/repository/com/redhat/demo/producer/0.1/producer-0.1-jar-with-dependencies.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 6.722 s
+[INFO] Finished at: 2015-07-03T22:07:05+02:00
+[INFO] Final Memory: 20M/433M
+[INFO] ------------------------------------------------------------------------

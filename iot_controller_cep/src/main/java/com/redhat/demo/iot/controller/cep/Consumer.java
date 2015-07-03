@@ -1,5 +1,6 @@
 package com.redhat.demo.iot.controller.cep;
 
+import javax.jms.BytesMessage;
 import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.ExceptionListener;
@@ -42,6 +43,7 @@ public class Consumer  implements ExceptionListener  {
 	
 	 public String run(int waitTimeout) {
 		 TextMessage 	textMessage;
+		 BytesMessage	byteMessage;
 		 String 		text=null;
 		 
          try {

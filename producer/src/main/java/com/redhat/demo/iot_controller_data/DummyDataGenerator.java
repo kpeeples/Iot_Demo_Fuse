@@ -13,7 +13,7 @@ public class DummyDataGenerator {
 
 	private DataSet tempSet;
 	
-	public void createInitialDataSet(int devType, int devID, int pay ) {
+	public void createInitialDataSet(int devType, int devID, int pay, String unit ) {
 		tempSet = new DataSet();
 		
 		SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyy HH:mm:ss SSS");
@@ -23,6 +23,7 @@ public class DummyDataGenerator {
 		tempSet.setDeviceType(devType);
 		tempSet.setDeviceID(devID);
 		tempSet.setPayload(pay);
+		tempSet.setUnit(unit);
 		tempSet.setCount(0);
 	}
 	
@@ -55,10 +56,11 @@ public class DummyDataGenerator {
 	public String getDataSetCSV() {
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append( tempSet.getDeviceType() ).append(", ");
-		sb.append( tempSet.getDeviceID() ).append(", ");
-		sb.append( tempSet.getPayload() ).append(", ");
-		sb.append( tempSet.getTimestamp() ).append(", ");
+		sb.append( tempSet.getDeviceType() ).append(",");
+		sb.append( tempSet.getDeviceID() ).append(",");
+		sb.append( tempSet.getPayload() ).append(",");
+		sb.append( tempSet.getUnit() ).append(",");
+		sb.append( tempSet.getTimestamp() ).append(",");
 		sb.append( tempSet.getCount() );
 		
 		return sb.toString();

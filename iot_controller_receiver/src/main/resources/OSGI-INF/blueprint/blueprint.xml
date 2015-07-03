@@ -40,7 +40,7 @@
         <marshal>
           <jaxb contextPath="com.redhat.demo.iot.controller.receiver.data"/>
         </marshal>
-        <convertBodyTo type="java.lang.String"/>
+        <convertBodyTo type="String"/>
         <log message="${body}"/>
         <to uri="activemqRemote:queue:message.to.router"/>
       </otherwise>

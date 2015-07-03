@@ -29,6 +29,6 @@ CMD $HOME/tmp/run.sh
 
 
 
-# Build command -> docker build --rm -t workspace_iotcontrollercep .
+# Build command -> docker build --rm -t workspacefuse_iotcontrollercep .
 # run command -> docker run -h iotcontrollerrouter -d workspace_iotcontrollercep
 # run and connect -> docker run -P -i -t -h iotcontrollercep workspace_iotcontrollercep /bin/bash

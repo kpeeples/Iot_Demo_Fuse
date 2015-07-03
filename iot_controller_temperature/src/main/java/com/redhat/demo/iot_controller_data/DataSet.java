@@ -12,7 +12,7 @@ public class DataSet {
 	private int		deviceType;
 	private int		deviceID;	
 	private	int		count;
-	private	int		payload;
+	private	double	payload;
 	private int		required;
 	
 	public DataSet()
@@ -25,7 +25,7 @@ public class DataSet {
 		this.required	= 0;
 	}
 	
-	public DataSet(String time, int devType, int devID, int count, int pay, int required)
+	public DataSet(String time, int devType, int devID, int count, double pay, int required)
 	{
 		this.timestamp 	= time;
 		this.deviceType = devType;
@@ -94,15 +94,15 @@ public class DataSet {
 	/**
 	 * @return the payload
 	 */
-	public int getPayload() {
+	public double getPayload() {
 		return payload;
 	}
 
 	/**
-	 * @param payload the payload to set
+	 * @param d the payload to set
 	 */
-	public void setPayload(int payload) {
-		this.payload = payload;
+	public void setPayload(double d) {
+		this.payload = d;
 	}
 
 	public int getCount() {
@@ -112,6 +112,8 @@ public class DataSet {
 	public void setCount(int count) {
 		this.count = count;
 	}
+	
+	
 	
 }
 	

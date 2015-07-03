@@ -6,15 +6,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "dataSet")
-@XmlType(propOrder = { "timestamp", "deviceType", "deviceID", "count", "payload", "unit", "required"})
+@XmlType(propOrder = { "timestamp", "deviceType", "deviceID", "count", "payload","unit", "required" })
 public class DataSet {
 	private String	timestamp;
 	private int		deviceType;
 	private int		deviceID;	
-	private int		count;
-	private	int		payload;
-	private int		required;
+	private	int		count;
+	private	double	payload;
 	private String	unit;
+	private int		required;
 	
 	public DataSet()
 	{
@@ -23,11 +23,11 @@ public class DataSet {
 		this.deviceID	= 0;
 		this.count		= 0;
 		this.payload	= 0;
-		this.required	= 0;
 		this.unit		= "";
+		this.required	= 0;
 	}
 	
-	public DataSet(String time, int devType, int devID, int count, String unit, int pay )
+	public DataSet(String time, int devType, int devID, int count, double pay, String unit, int required)
 	{
 		this.timestamp 	= time;
 		this.deviceType = devType;
@@ -35,7 +35,7 @@ public class DataSet {
 		this.count		= count;
 		this.payload	= pay;
 		this.unit		= unit;
-		this.required	= 0;
+		this.required	= required;
 	}
 
 	/**
@@ -97,14 +97,14 @@ public class DataSet {
 	/**
 	 * @return the payload
 	 */
-	public int getPayload() {
+	public double getPayload() {
 		return payload;
 	}
 
 	/**
 	 * @param payload the payload to set
 	 */
-	public void setPayload(int payload) {
+	public void setPayload(double payload) {
 		this.payload = payload;
 	}
 

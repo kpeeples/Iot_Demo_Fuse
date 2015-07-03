@@ -99,10 +99,10 @@ public class DataSet {
 	}
 
 	/**
-	 * @param payload the payload to set
+	 * @param d the payload to set
 	 */
-	public void setPayload(int payload) {
-		this.payload = payload;
+	public void setPayload(int d) {
+		this.payload = d;
 	}
 
 	public int getCount() {

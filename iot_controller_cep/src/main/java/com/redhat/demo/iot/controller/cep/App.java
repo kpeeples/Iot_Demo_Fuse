@@ -54,6 +54,8 @@ public class App
 			messageFromQueue = consumer.run(10000);
 									
 			if ( messageFromQueue != null ) {
+				
+				System.out.println("CEP received message: " + messageFromQueue );
 	
 	            // Convert TextMessage to DataSet via jaxb unmarshalling
 	            JAXBContext jaxbContext = JAXBContext.newInstance(DataSet.class);
@@ -63,6 +65,8 @@ public class App
 	            DataSet event = (DataSet) unmarshaller.unmarshal(reader);
 	            
 	            event = cepServer.insert( event);	 	            
+	            
+	            System.out.println("CEP delivers result: " + event.getRequired());
 	            
 	            // Convert changed message back to XML
 	            String result;
