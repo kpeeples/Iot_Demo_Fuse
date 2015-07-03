@@ -25,9 +25,13 @@ image::./pictures/iot.png[]
 As for now, this demo includes:
 
  * 1 edge device, which simulates a temperature sensor
+  ** light, randomly changed values
+  ** choose between XML and CSV dataformat
+  ** choose between Fahrenheit and Celsius
  * controller functionality to
   ** transformation of edge message to a XML format ( not yet needed )
   ** route message based on source to be able to apply different procedures
+  ** if temperature is received in Fahrenheit, then if will be transformed to Celsius
   ** complex event processing to filter messages
  * datacenter functionality to
   ** apply business rules to decide if data is important and needs saving
@@ -55,7 +59,10 @@ As of now, it works with the following steps:
    * if random number is >= 990 increase data by 1
  4. back to 2.
 
- You can choose if the messages are supposed to be delivered as XML or CSV.
+You can choose if the messages are supposed to be delivered
+
+ * as XML or CSV
+ * in Celsius or Fahrenheit
 
 === Controller
 
@@ -143,7 +150,7 @@ All you need to do is
 
 **Please note that you should have at least 12GB memory to run this environment
 on one server!**
- 
+
 Once you have completed the previous step, you can run the demo in your own
 environment. Simply use `./docker-compose up` to start all images with the
 required parameter and configurations.
