@@ -199,7 +199,7 @@
                 <datasource jta="false" jndi-name="java:jboss/datasources/iot_demo" pool-name="IOT_Demo" enabled="true" use-ccm="false">
                     <connection-url>jdbc:postgresql://postgres:5432/demo</connection-url>
                     <driver-class>org.postgresql.Driver</driver-class>
-                    <driver>postgresql-9.3-1103.jdbc41.jar</driver>
+                    <driver>postgresql-9.3-1101.jdbc41.jar</driver>
                     <security>
                         <user-name>psteiner</user-name>
                         <password>change12_me</password>

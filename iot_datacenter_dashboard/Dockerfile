@@ -27,6 +27,7 @@ USER psteiner
 RUN java -jar $HOME/tmp/jboss-dv-installer-6.1.0.redhat-3.jar $HOME/tmp/Install_Log.xml
 
 RUN mv $HOME/tmp/appl* $HOME/DV-6.1.0/jboss-eap-6.3/standalone/configuration
+RUN mv $HOME/tmp/standalone.xml $HOME/DV-6.1.0/jboss-eap-6.3/standalone/configuration
 RUN curl -o $HOME/DV-6.1.0/jboss-eap-6.3/standalone/deployments/postgresql-9.3-1101.jdbc41.jar https://jdbc.postgresql.org/download/postgresql-9.3-1103.jdbc41.jar
 
 # start.sh

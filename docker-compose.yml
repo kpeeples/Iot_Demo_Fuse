@@ -81,6 +81,10 @@ iotdatacenterdashboard:
         hostname: iotdatacenterdashboard
         links:
                - postgres
+        expose:
+                - 8080
+                - 9990
 
         ports:
                 - "10006:8080"
+                - "10007:9990"
