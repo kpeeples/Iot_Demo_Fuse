@@ -130,7 +130,7 @@ git clone https://github.com/PatrickSteiner/Iot_Demo_Fuse
 === Providing the Red Hat JBoss Products
 I have not included the various JBoss products in the git repository, so it will be your obligation to retrieve them and to place them in their directories.
 
-	* `jboss-fuse-full-6.1.1.redhat-412.zip` into `./Fuse/Docker_Files/software`
+	* ` jboss-fuse-full-6.2.0.redhat-133.zip` into `./Fuse/Docker_Files/software`
   * `jboss-dv-installer-6.1.0.redhat-3.jar` into `./iot_datacenter_dashboard/Docker_Files/software`
   * `boss-bpmsuite-6.1.0.GA-deployable-eap6.x.zip` into `./iot_datacenter_bpm/Docker_Files/software`
   * `jboss-eap-6.4.0.zip` into `./iot_datacenter_bpm/Docker_Files/software`
@@ -206,24 +206,26 @@ values based on a simple structure
 @XmlRootElement(name = "dataSet")
 @XmlType(propOrder = { "timestamp", "deviceType", "deviceID", "payload","required" })
 public class DataSet {
-	private String	timestamp;
-	private int		deviceType;
-	private int		deviceID;
-	private	int		payload;
-	private int		required;
+  private String   timestamp;
+  private int      deviceType;
+  private int      deviceID;
+  private int      payload;
+  private int      required;
+  private String   unit;
 ----
 
 There are system properties which you can use to alter the behavior of the client
 
 [width="80%",frame="topbot",options="header,footer"]
 |======================
-|Name | Function | Default
-|deviceType | Type of device to simulate | 1
-|deviceID | ID of device to simulate | 1
-|initialValue | value to start simulation with | 70
-|count | How many messages to produce | 1
-|waitime | Seconds to wait between messages | 1
-|messageType | XML or CSV based message | XML
+|Name | Function | Default | Options
+|deviceType | Type of device to simulate | 1 | 1=temperature
+|deviceID | ID of device to simulate | 1 | <any>
+|initialValue | value to start simulation with | 70 | <any integer>
+|count | How many messages to produce | 1 | <any integer>
+|waitime | Seconds to wait between messages | 1 | <any in seconds>
+|messageType | XML or CSV based message | XML | "xml" or "csv"
+|unit | unit for temperature payload | "C" | "C" or "F"
 |======================
 
 For convenience I created a few simple ( very simple ) scripts which do the following
