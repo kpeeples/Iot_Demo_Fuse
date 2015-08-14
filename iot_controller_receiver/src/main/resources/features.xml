@@ -1,0 +1,11 @@
+<features>
+  <feature name="controller_receiver" version="${project.version}" resolver="(obr)">
+    <feature version="${version.camel}">camel-blueprint</feature>
+    <feature version="${version.camel}">camel-core</feature>
+    <feature version="${version.camel}">camel-dozer</feature>
+    <feature version="${version.camel}">camel-jaxb</feature>
+    <feature version="${version.camel}">camel-jackson</feature>
+    <feature version="${version.camel}">camel-bindy</feature> 
+    <bundle>mvn:com.redhat.demo.iot.controller/controller_receiver/${project.version}</bundle>
+  </feature>
+</features>

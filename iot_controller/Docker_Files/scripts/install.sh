@@ -1,0 +1,29 @@
+#!/bin/bash
+#
+# Little helper for the installation of Red Hat JBoss Fuse in a Docker container
+#
+
+echo "Start Fuse and wait for start procedure to end"
+$HOME/$FUSE_LOCATION/bin/start
+
+$HOME/$FUSE_LOCATION/bin/status
+while [ "$?" != "0" ]
+do
+   echo "."
+   sleep 20
+   $HOME/$FUSE_LOCATION/bin/status
+done
+
+echo "Now let's deploy the bundle"
+echo $HOME/$FUSE_LOCATION/bin/client "osgi:install -s file://$HOME/tmp/$RECEIVER_BUNDLE_NAME"
+$HOME/$FUSE_LOCATION/bin/client "osgi:install -s file://$HOME/tmp/$RECEIVER_BUNDLE_NAME"
+
+sleep 10
+
+echo $HOME/$FUSE_LOCATION/bin/client "osgi:install -s file://$HOME/tmp/$ROUTER_BUNDLE_NAME"
+$HOME/$FUSE_LOCATION/bin/client "osgi:install -s file://$HOME/tmp/$ROUTER_BUNDLE_NAME"
+
+sleep 10
+
+echo $HOME/$FUSE_LOCATION/bin/client "osgi:install -s file://$HOME/tmp/$TEMPERATURE_BUNDLE_NAME"
+$HOME/$FUSE_LOCATION/bin/client "osgi:install -s file://$HOME/tmp/$TEMPERATURE_BUNDLE_NAME"

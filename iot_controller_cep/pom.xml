@@ -72,7 +72,10 @@
           <enabled>false</enabled>
         </snapshots>
       </repository>
+    
+    
      
+
       <repository>
         <id>jboss-public-repository</id>
         <url>http://repository.jboss.org/nexus/content/repositories/public/</url>
@@ -99,7 +102,8 @@
 		<dependency>
 	  		<groupId>org.apache.activemq</groupId>
 	 		<artifactId>activemq-all</artifactId>
-	  		<version>5.9.0</version>
+	  		<version>5.11.0.redhat-620133</version>
+
 		</dependency>
 		
 	
