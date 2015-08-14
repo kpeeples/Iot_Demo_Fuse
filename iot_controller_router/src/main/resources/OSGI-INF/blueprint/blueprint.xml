@@ -15,17 +15,6 @@
        </property>
     </bean>
 
-    <bean id="activemqRemote" class="org.apache.activemq.camel.component.ActiveMQComponent" >
-      <property name="connectionFactory">
-        <bean class="org.apache.activemq.ActiveMQConnectionFactory">
-          <property name="brokerURL" value="tcp://iotcontrollertemperature:61616" />
-          <property name="userName" value="admin"/>
-          <property name="password" value="admin"/>
-        </bean>
-       </property>
-    </bean>
-
-
   <camelContext xmlns="http://camel.apache.org/schema/blueprint">
   <route id="controller_receive_router">
     <from uri="activemqLocal:queue:message.to.router"/>
@@ -37,7 +26,7 @@
       </when>
       <when>
         <xpath>dataSet/deviceType = "1"</xpath>
-        <to uri="activemqRemote:queue:message.to.temperature"/>
+        <to uri="activemqLocal:queue:message.to.temperature"/>
       </when>
       <otherwise>
         <to uri="activemqLocal:queue:message.to.unknown"/>

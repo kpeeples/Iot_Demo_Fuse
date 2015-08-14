@@ -47,5 +47,5 @@ CMD $HOME/run.sh
 
 
 # Build command -> docker build --rm -t iotcontroller .
-# run command -> docker run -d -p 10000:8181 iotcontroller
-# run and connect -> docker run -p 10000:8181 -i -t iotcontroller /bin/bash
+# run command -> docker run -d -p 10000:8181 -p 61616:61616 iotcontroller
+# run and connect -> docker run -p 10000:8181 -p 61616:61616 -i -t iotcontroller /bin/bash
