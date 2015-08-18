@@ -87,11 +87,17 @@
         </systemUsage>
 
         <destinations>
-		        <queue physicalName="message.receive" />
+		          <queue physicalName="message.receive" />
+              <queue physicalName="message.to.router" />
+      		    <queue physicalName="message.to.pressure" />
+      		    <queue physicalName="message.to.unknown" />
+              <queue physicalName="message.to.temperature" />
+      		    <queue physicalName="message.to.monitor" />
+              <queue physicalName="message.to.cep" />
 	      </destinations>
 
         <transportConnectors>
-            <transportConnector name="openwire" uri="tcp://${bindAddress}:${bindPort}"/>
+            <transportConnector name="openwire" uri="tcp://0.0.0.0:${bindPort}"/>
         </transportConnectors>
     </broker>
 

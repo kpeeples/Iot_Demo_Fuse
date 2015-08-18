@@ -17,13 +17,3 @@ done
 echo "Now let's deploy the bundle"
 echo $HOME/$FUSE_LOCATION/bin/client "osgi:install -s file://$HOME/tmp/$RECEIVER_BUNDLE_NAME"
 $HOME/$FUSE_LOCATION/bin/client "osgi:install -s file://$HOME/tmp/$RECEIVER_BUNDLE_NAME"
-
-sleep 10
-
-echo $HOME/$FUSE_LOCATION/bin/client "osgi:install -s file://$HOME/tmp/$ROUTER_BUNDLE_NAME"
-$HOME/$FUSE_LOCATION/bin/client "osgi:install -s file://$HOME/tmp/$ROUTER_BUNDLE_NAME"
-
-sleep 10
-
-echo $HOME/$FUSE_LOCATION/bin/client "osgi:install -s file://$HOME/tmp/$TEMPERATURE_BUNDLE_NAME"
-$HOME/$FUSE_LOCATION/bin/client "osgi:install -s file://$HOME/tmp/$TEMPERATURE_BUNDLE_NAME"

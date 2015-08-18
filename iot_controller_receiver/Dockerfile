@@ -6,9 +6,6 @@ USER root
 
 ENV HOME /home/psteiner
 ENV RECEIVER_BUNDLE_NAME controller_receiver-1.0.0-SNAPSHOT.jar
-ENV ROUTER_BUNDLE_NAME controller_router-1.0.0-SNAPSHOT.jar
-ENV TEMPERATURE_BUNDLE_NAME controller_temperature-1.0.0-SNAPSHOT.jar
-ENV BROKER_NAME iotcontroller
 
 # copy required ( or not ) configurations
 ADD Docker_Files/config/activemq.xml $HOME/tmp/
@@ -17,9 +14,7 @@ ADD Docker_Files/config/activemq.xml $HOME/tmp/
 ADD Docker_Files/scripts/install.sh $HOME/tmp/
 
 # copy deployable
-ADD Docker_Files/$RECEIVER_BUNDLE_NAME $HOME/tmp/
-ADD Docker_Files/$ROUTER_BUNDLE_NAME $HOME/tmp/
-ADD Docker_Files/$TEMPERATURE_BUNDLE_NAME $HOME/tmp/
+ADD target/$RECEIVER_BUNDLE_NAME $HOME/tmp/
 
 
 # let the user 'psteiner' own the files

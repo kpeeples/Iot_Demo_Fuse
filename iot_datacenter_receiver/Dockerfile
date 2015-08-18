@@ -40,6 +40,6 @@ EXPOSE 22 8101 8181 44444 1099 61616 80 8080
 # ENTRYPOINT $HOME/$FUSE_LOCATION/bin/fuse
 CMD $HOME/run.sh
 
-# Build command -> docker build --rm -t workspacefuse_iotdatacenterreceiver .
-# run command -> docker run -d -p 10000:8181 workspacefuse_iotdatacenterreceiver
-# run and connect -> docker run -p 10000:8181 -i -t workspacefuse_iotdatacenterreceiver /bin/bash
+# Build command -> docker build --rm -t iotdemofuse_iotdatacenterreceiver .
+# run command -> docker run -d -p 10000:8181 iotdemofuse_iotdatacenterreceiver
+# run and connect -> docker run -p 10000:8181 -i -t iotdemofuse_iotdatacenterreceiver /bin/bash

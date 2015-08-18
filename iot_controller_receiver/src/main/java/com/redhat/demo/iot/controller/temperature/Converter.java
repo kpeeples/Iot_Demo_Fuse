@@ -3,7 +3,8 @@ package com.redhat.demo.iot.controller.temperature;
 import org.apache.camel.Exchange;
 import org.apache.camel.Handler;
 
-import com.redhat.demo.iot_controller_data.DataSet;
+import com.redhat.demo.iot.controller.receiver.data.DataSet;
+
 
 public class Converter {
 	

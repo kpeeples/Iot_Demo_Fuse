@@ -20,7 +20,7 @@
   	</bean>
 
   <camelContext xmlns="http://camel.apache.org/schema/blueprint">
-  <route id="controller_receive_message">
+  <route id="controller_receiver">
     <from uri="activemqLocal:queue:message.receive"/>
     <choice>
       <when>
@@ -28,7 +28,7 @@
         <to uri="activemqLocal:queue:message.to.router"/>
       </when>
       <otherwise>
-        <unmarshal ref="bindyDataformat" />
+        <unmarshal ref="bindyDataformat"/>
         <marshal>
           <jaxb contextPath="com.redhat.demo.iot.controller.receiver.data"/>
         </marshal>
@@ -38,6 +38,44 @@
       </otherwise>
     </choice>
   </route>
+  <route id="controller_router">
+    <from uri="activemqLocal:queue:message.to.router"/>
+    <log message="${body}"/>
+    <choice>
+      <when>
+        <xpath>dataSet/deviceType = "0"</xpath>
+        <to uri="activemqLocal:queue:message.to.pressure"/>
+      </when>
+      <when>
+        <xpath>dataSet/deviceType = "1"</xpath>
+        <to uri="activemqLocal:queue:message.to.temperature"/>
+      </when>
+      <otherwise>
+        <to uri="activemqLocal:queue:message.to.unknown"/>
+      </otherwise>
+    </choice>
+  </route>
+  
+  <route id="controller_temperature">
+    <from uri="activemqLocal:queue:message.to.temperature"/>
+    <log message="${body}"/>
+    <choice>
+      <when>
+        <xpath>dataSet/unit = "C"</xpath>
+        <log message="Temperature received as Celsius, so nothing to do"/>
+        <to uri="activemqLocal:queue:message.to.cep"/>
+      </when>
+      <otherwise>
+        <log message="Temperature received as Fahrenheit, we need to convert the data"/>
+        <bean method="f2c" beanType="com.redhat.demo.iot.controller.temperature.Converter"/>
+    	<log message="${body}"/>
+    	<convertBodyTo type="java.lang.String"/>
+        <to uri="activemqLocal:queue:message.to.cep?jmsMessageType=Text"/>
+      </otherwise>
+    </choice>
+
+  </route>
+  
 </camelContext>
 
 </blueprint>

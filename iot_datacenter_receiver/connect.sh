@@ -6,7 +6,7 @@
 
 # This script builds all required docker images.
 
-IMAGE_NAME="iotcontrollerreceiver"
+IMAGE_NAME="iotdatacenterreceiver"
 
 function connect_image {
   IMAGE=$1

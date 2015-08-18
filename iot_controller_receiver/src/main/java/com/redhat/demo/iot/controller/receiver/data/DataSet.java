@@ -11,7 +11,7 @@ import org.apache.camel.dataformat.bindy.annotation.DataField;
 public class DataSet {
 	private int		deviceType;
 	private int		deviceID;
-	private	int		payload;
+	private	double	payload;
 	private String	timestamp;
 	private int		count;
 	private String	unit;
@@ -98,14 +98,14 @@ public class DataSet {
 	/**
 	 * @return the payload
 	 */
-	public int getPayload() {
+	public double getPayload() {
 		return payload;
 	}
 
 	/**
 	 * @param payload the payload to set
 	 */
-	public void setPayload(int payload) {
+	public void setPayload(double payload) {
 		this.payload = payload;
 	}
 

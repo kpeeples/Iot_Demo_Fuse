@@ -4,7 +4,7 @@ MAINTAINER psteiner <psteiner@redhat.com>
 
 USER root
 
-ENV APPL iot_controller_cep-jar-with-dependencies.jar 
+ENV APPL iot_controller_cep-jar-with-dependencies.jar
 
 # Transfer application
 # ADD src $HOME/tmp/src/
