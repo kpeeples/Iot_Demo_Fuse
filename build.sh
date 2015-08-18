@@ -13,19 +13,8 @@ popd > /dev/null
 echo "-- iot_controller_receiver"
 pushd . > /dev/null
 cd iot_controller_receiver
-mvn clean install >> $BUILD_LOGFILE 
-popd > /dev/null
-
-echo "-- iot_controller_router"
-pushd . > /dev/null
-cd iot_controller_router
-mvn clean install >>  $BUILD_LOGFILE
-popd > /dev/null
-
-echo "-- iot_controller_temperature"
-pushd . > /dev/null
-cd iot_controller_temperature
-mvn clean install >>  $BUILD_LOGFILE
+mvn clean install >> $BUILD_LOGFILE
+cp target/*.jar ../iot_controller/Docker_Files
 popd > /dev/null
 
 echo "-- iot_controller_cep"
@@ -58,8 +47,3 @@ pushd .
 cd Fuse
 docker build --rm -t psteiner/fuse .
 popd
-
-echo "-- Building docker-compose based images"
-docker-compose build
-
-
