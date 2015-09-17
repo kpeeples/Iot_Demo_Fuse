@@ -1,0 +1,142 @@
+{
+   "kind": "Template",
+   "apiVersion": "v1",
+   "metadata": {
+     "name": "iot-demo",
+     "annotations": {
+        "description": "An example IoT Application",
+        "tags": "instant-app",
+        "iconClass": "icon-php"
+     }
+   },
+   "labels": {
+      "application": "iotcontrollerreceiver",
+      "createdBy": "template-iotcontrollerreceiver",
+      "template": "iotcontrollerreceiver"
+   },
+   "objects": [
+     {
+        "kind": "Service",
+        "apiVersion": "v1",
+        "metadata": {
+           "name": "iotcontrollerreceiver",
+           "labels": {
+              "application": "iotcontrollerreceiver"
+           }
+        },
+        "spec": {
+           "ports": [
+              {
+                 "port": 8181,
+                 "targetPort": 8181
+              }
+           ],
+           "selector": {
+              "deploymentConfig": "iotcontrollerreceiver"
+           }
+        }
+     },
+     {
+        "kind": "Route",
+        "apiVersion": "v1",
+        "metadata": {
+           "name": "iotcontrollerreceiver",
+           "labels": {
+              "application": "iotcontrollerreceiver"
+           },
+           "annotations": {
+              "description": "Route for IoT Controller Receiver"
+           }
+        },
+        "spec": {
+           "host": "iot-demo.cloudapps.example.com",
+           "to": {
+              "kind": "Service",
+              "name": "iotcontrollerreceiver"
+           }
+        }
+     },
+     {
+        "kind": "DeploymentConfig",
+        "apiVersion": "v1",
+        "metadata": {
+           "name": "iotcontrollerreceiver",
+           "labels": {
+              "deploymentConfig": "iotcontrollerreceiver",
+              "application": "iotcontrollerreceiver"
+           }
+        },
+        "spec": {
+           "replicas": 1,
+           "selector": {
+              "deploymentConfig": "iotcontrollerreceiver"
+           },
+           "strategy": {
+              "type": "Recreate"
+           },
+           "template": {
+              "metadata": {
+                 "labels": {
+                    "deploymentConfig": "iotcontrollerreceiver",
+                    "application": "iotcontrollerreceiver"
+                 },
+                 "name": "iotcontrollerreceiver"
+              },
+              "spec": {
+                 "containers": [
+                    {
+                       "name": "iotcontrollerreceiver",
+                       "image": "iotcontrollerreceiver",
+                       "imagePullPolicy": "IfNotPresent",
+                       "env": [
+                          {
+                             "name": "OPENSHIFT_DNS_PING_SERVICE_NAME",
+                             "value": "mlbparks-ping"
+                          }
+                       ],
+                       "ports": [
+                          {
+                             "name": "receiver-http",
+                             "containerPort": 8080,
+                             "protocol": "TCP"
+                          },
+                          {
+                             "name": "receiver-jms",
+                             "containerPort": 61616,
+                             "protocol": "TCP"
+                          }
+                       ],
+                       "resources": {},
+                       "terminationMessagePath": "/dev/termination-log",
+                       "securityContext": {
+                          "capabilities": {},
+                          "privileged": false
+                       }
+                    }
+                 ],
+                 "restartPolicy": "Always",
+                 "dnsPolicy": "ClusterFirst"
+              }
+           },
+           "triggers": [
+              {
+                 "type": "ImageChange",
+                 "imageChangeParams": {
+                    "automatic": true,
+                    "containerNames": [
+                       "iotcontrollerreceiver"
+                    ],
+                    "from": {
+                       "kind": "ImageStreamTag",
+                       "name": "iotcontrollerreceiver:latest"
+                    }
+                 }
+              },
+              {
+                 "type": "ConfigChange"
+              }
+           ]
+        }
+     }
+  ]
+}
