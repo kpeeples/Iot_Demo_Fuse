@@ -27,13 +27,22 @@
         "spec": {
            "ports": [
               {
+                 "name": "receiver-http",
                  "port": 8181,
                  "targetPort": 8181
+              },
+              {
+                 "name": "receiver-jms",
+                 "protocol": "TCP",
+                 "port": 61616,
+                 "targetPort": 61616,
+                 "nodePort": 30061
               }
            ],
            "selector": {
               "deploymentConfig": "iotcontrollerreceiver"
-           }
+           },
+           "type": "NodePort"
         }
      },
      {
@@ -97,7 +106,7 @@
                        "ports": [
                           {
                              "name": "receiver-http",
-                             "containerPort": 8080,
+                             "containerPort": 8181,
                              "protocol": "TCP"
                           },
                           {
