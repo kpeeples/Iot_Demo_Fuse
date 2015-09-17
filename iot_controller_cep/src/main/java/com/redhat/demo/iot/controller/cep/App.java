@@ -24,8 +24,12 @@ public class App
 {
     private static final Logger log = Logger.getLogger(CepServer.class.getName());
 	
-	public static String sourceBrokerURL = "tcp://iotcontrollerreceiver:61616";
-	public static String targetBrokerURL = "tcp://iotdatacenterreceiver:61616";
+	public static String sourceBrokerURL = "tcp://localhost:61616";
+	// public static String sourceBrokerURL = "tcp://iotcontrollerreceiver:61616";
+	
+	public static String targetBrokerURL = "tcp://localhost:61616";
+	//public static String targetBrokerURL = "tcp://iotdatacenterreceiver:61616";
+	
 	public static String sourceQueueName = "message.to.cep";
 	public static String targetQueueName = "message.to.datacenter";
 	 
