@@ -11,7 +11,7 @@
    },
    "labels": {
       "application": "iotcontrollerreceiver",
-      "createdBy": "template-iotcontrollerreceiver",
+      "createdBy": "psteiner",
       "template": "iotcontrollerreceiver"
    },
    "objects": [
@@ -114,13 +114,12 @@
                              "containerPort": 61616,
                              "protocol": "TCP"
                           }
-                       ],
-                       "resources": {},
-                       "terminationMessagePath": "/dev/termination-log",
-                       "securityContext": {
-                          "capabilities": {},
-                          "privileged": false
-                       }
+                       ]
+                    },
+                    {
+                       "name": "iotcontrollercep",
+                       "image": "iotcontrollercep",
+                       "imagePullPolicy": "IfNotPresent"
                     }
                  ],
                  "restartPolicy": "Always",
@@ -138,6 +137,19 @@
                     "from": {
                        "kind": "ImageStreamTag",
                        "name": "iotcontrollerreceiver:latest"
+                    }
+                 }
+              },
+              {
+                 "type": "ImageChange",
+                 "imageChangeParams": {
+                    "automatic": true,
+                    "containerNames": [
+                       "iotcontrollercep"
+                    ],
+                    "from": {
+                       "kind": "ImageStreamTag",
+                       "name": "iotcontrollercep:latest"
                     }
                  }
               },
